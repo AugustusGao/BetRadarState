@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QIC.Sport.State.Collector.BR
+namespace QIC.Sport.Stats.Collector
 {
     public class Class1
     {

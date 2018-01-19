@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("QIC.Sport.State.Collector.BR")]
+[assembly: AssemblyTitle("QIC.Sport.Stats.Collector")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("QIC.Sport.State.Collector.BR")]
+[assembly: AssemblyProduct("QIC.Sport.Stats.Collector")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("85c7e459-8d80-4295-b7a5-e77fa40458d9")]
+[assembly: Guid("fc1de2fe-8387-4c10-a62f-70a97ecbaf7d")]
 
 // 程序集的版本信息由下面四个值组成: 
 //
