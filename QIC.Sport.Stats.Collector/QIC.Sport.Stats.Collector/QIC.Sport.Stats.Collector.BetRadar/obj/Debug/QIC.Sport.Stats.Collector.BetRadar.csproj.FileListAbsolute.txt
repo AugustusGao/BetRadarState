@@ -1,0 +1,4 @@
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\QIC.Sport.Stats.Collector.BetRadar.dll
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\QIC.Sport.Stats.Collector.BetRadar.pdb
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\obj\Debug\QIC.Sport.Stats.Collector.BetRadar.dll
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\obj\Debug\QIC.Sport.Stats.Collector.BetRadar.pdb

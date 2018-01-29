@@ -1,0 +1,4 @@
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
+E:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb
