@@ -1,9 +1,16 @@
 
-namespace QIC.Sport.Stats.Collector.Common{
+namespace QIC.Sport.Stats.Collector.Common
+{
     /**
      * 
      */
-    public enum DataType {
+    public enum DataType
+    {
+        Organizer,
+
+        League,
+
+
         TopRank,
         Injury,
         Card

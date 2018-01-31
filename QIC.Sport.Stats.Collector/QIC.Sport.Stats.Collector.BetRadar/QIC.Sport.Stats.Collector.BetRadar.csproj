@@ -30,6 +30,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\..\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\..\..\lib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\..\..\lib\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\..\..\..\lib\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="ML.Infrastructure">
+      <HintPath>..\..\..\..\lib\ML.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="ML.NetComponent">
+      <HintPath>..\..\..\..\lib\ML.NetComponent.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,13 +60,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="LeagueManager\LeagueManager.cs" />
+    <Compile Include="BetRadarParam.cs" />
+    <Compile Include="BetRadarReptile.cs" />
+    <Compile Include="Handle\BaseHandle.cs" />
+    <Compile Include="Handle\HandleFactory.cs" />
+    <Compile Include="Handle\IHandle.cs" />
+    <Compile Include="Handle\OrganizerHandle.cs" />
+    <Compile Include="League\LeagueManager.cs" />
+    <Compile Include="League\Param\LeagueParam.cs" />
+    <Compile Include="Organizer\OrganizerManager.cs" />
+    <Compile Include="Organizer\OrganizerParam.cs" />
+    <Compile Include="Player\PlayerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Team\TeamManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="PlayerManager\" />
-    <Folder Include="TeamManager\" />
+    <Folder Include="League\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QIC.Sport.Stats.Collector.Cache\QIC.Sport.Stats.Collector.Cache.csproj">
+      <Project>{45adc638-be45-4699-adfc-78c3e020d07a}</Project>
+      <Name>QIC.Sport.Stats.Collector.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QIC.Sport.Stats.Collector.Common\QIC.Sport.Stats.Collector.Common.csproj">
+      <Project>{540f8554-8c7c-4d64-aa60-8dc326db4321}</Project>
+      <Name>QIC.Sport.Stats.Collector.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QIC.Sport.Stats.Collector.ITakerReptile\QIC.Sport.Stats.Collector.ITakerReptile.csproj">
+      <Project>{3e2268fa-8d23-4ff5-9c7f-229908fa9654}</Project>
+      <Name>QIC.Sport.Stats.Collector.ITakerReptile</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,6 +9,6 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile.Dto
 {
     public class BaseParam
     {
-        public DataType DataType;
+        public virtual string GetKey() { return null; }
     }
 }

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QIC.Sport.Stats.Collector.ITakerReptile.Dto;
 
 namespace QIC.Sport.Stats.Collector.ITakerReptile
 {
-    interface IWorkManager
+   public interface IWorkManager
     {
-        void AddOrUpdateParam();
-        void RemoveParam();
-        void EnQueueData();
-        void Start() { }
-        void Stop() { }
+        void AddOrUpdateParam(BaseParam baseParam);
+        void RemoveParam(BaseParam baseParam);
+        void EnQueueData(BaseData baseData);
+        void Start();
+        void Stop();
     }
 }

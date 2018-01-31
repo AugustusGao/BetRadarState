@@ -8,17 +8,28 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
 {
     public class BaseReptile : IReptile
     {
-        protected Dictionary<string, BaseWorkManager> DicWorkManagers = new Dictionary<string, BaseWorkManager>();
-        public void InitWorkManager(List<BaseWorkManager> baseWorkManager) { }
+        protected Dictionary<string, IWorkManager> DicWorkManagers = new Dictionary<string, IWorkManager>();
 
         public void Start()
         {
-            throw new NotImplementedException();
+            // todo 循环Start各个BaseWorkManager
+            foreach (var manager in DicWorkManagers.Values)
+            {
+                manager.Start();
+            }
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            foreach (var manager in DicWorkManagers.Values)
+            {
+                manager.Stop();
+            }
+        }
+
+        public virtual void InitWorkManager()
+        {
+
         }
     }
 }
