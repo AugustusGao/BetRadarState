@@ -16,6 +16,8 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
     public class BaseWorkManager : IWorkManager
     {
         protected ConcurrentDictionary<string, BaseParam> DicParam = new ConcurrentDictionary<string, BaseParam>();
+        protected ILog logger;
+        protected int IntervalsTime = 10;    //  测试间隔时间调整
 
         private bool isClosed;
         private bool isCompleted;
@@ -35,6 +37,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
 
         public void Start()
         {
+            logger = LogManager.GetLogger(this.GetType());
             workThread = new Thread(Work);
             workThread.Start();
         }
@@ -65,7 +68,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
             processers.Add(processerFactory.StartNew(() => ProcessData(baseData)));
         }
 
-        protected virtual string RequestPage(string url, string arg, string method = "GET", string cookie = "", string referer = "", int timeOut = 100000)
+        protected virtual string RequestPage(string url, string arg = "", string method = "GET", string cookie = "", string referer = "", int timeOut = 100000)
         {
             try
             {
@@ -80,6 +83,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
                     Referer = referer,
                     Timeout = timeOut
                 };
+                item.UserAgent = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36";
                 if (method == "POST") item.ContentType = "application/x-www-form-urlencoded";
                 item.Header.Add("Accept-Encoding", "gzip,deflate");
                 item.Encoding = Encoding.UTF8;
@@ -92,7 +96,6 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
             }
             catch (Exception ex)
             {
-                ILog logger = LogManager.GetLogger(this.GetType());
                 logger.Error(ex.ToString());
                 logger.Error(string.Format("Url = " + url));
                 return string.Empty;
@@ -104,20 +107,28 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
         {
             while (!isClosed)
             {
-                isCompleted = false;
-
-                foreach (var kv in DicParam)
+                try
                 {
-                    executers.Add(executerFactory.StartNew(() => ExecuteTask(kv.Value)));
+                    isCompleted = false;
+
+                    foreach (var kv in DicParam)
+                    {
+                        executers.Add(executerFactory.StartNew(() => ExecuteTask(kv.Value)));
+                    }
+
+                    Task.WaitAll(executers.ToArray());
+                    Task.WaitAll(processers.ToArray());
+
+                    executers.Clear();
+                    processers.Clear();
+                    isCompleted = true;
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex.ToString());
                 }
 
-                Task.WaitAll(executers.ToArray());
-                Task.WaitAll(processers.ToArray());
-
-                executers.Clear();
-                processers.Clear();
-                isCompleted = true;
-                Thread.Sleep(10);
+                Thread.Sleep(IntervalsTime);
             }
         }
     }

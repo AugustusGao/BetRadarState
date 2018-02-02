@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace QIC.Sport.Stats.Collector.Common{
+namespace QIC.Sport.Stats.Collector.Common
+{
     /**
      * 
      */

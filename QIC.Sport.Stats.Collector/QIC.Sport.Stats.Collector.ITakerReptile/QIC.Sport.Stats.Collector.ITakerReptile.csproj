@@ -54,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QIC.Sport.Stats.Collector.Cache\QIC.Sport.Stats.Collector.Cache.csproj">
+      <Project>{45adc638-be45-4699-adfc-78c3e020d07a}</Project>
+      <Name>QIC.Sport.Stats.Collector.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QIC.Sport.Stats.Collector.Common\QIC.Sport.Stats.Collector.Common.csproj">
       <Project>{540f8554-8c7c-4d64-aa60-8dc326db4321}</Project>
       <Name>QIC.Sport.Stats.Collector.Common</Name>

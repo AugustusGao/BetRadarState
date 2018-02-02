@@ -1,9 +1,11 @@
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.csprojResolveAssemblyReference.cache
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.csprojResolveAssemblyReference.cache
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\log4net.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\ML.NetComponent.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Cache.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Cache.pdb
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb

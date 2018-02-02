@@ -39,7 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BaseCacheEntity.cs" />
+    <Compile Include="BaseCacheManager.cs" />
+    <Compile Include="CacheDataManager\OrganizerEntityManager.cs" />
+    <Compile Include="CacheData\OrganizerEntity.cs" />
+    <Compile Include="ICacheManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
