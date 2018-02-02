@@ -8,7 +8,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar
 {
     public enum RBHandleType
     {
-        Organizer,
-        League,
+        Organizer,              //  国家组织
+        Season,                 //  赛季
     }
 }

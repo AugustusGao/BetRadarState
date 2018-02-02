@@ -70,7 +70,9 @@
   <ItemGroup>
     <Compile Include="BRData.cs" />
     <Compile Include="HandleType.cs" />
-    <Compile Include="Handle\LeagueHandle.cs" />
+    <Compile Include="Handle\AssistsHandle.cs" />
+    <Compile Include="Handle\CardHandle.cs" />
+    <Compile Include="Handle\SeasonHandle.cs" />
     <Compile Include="Handle\PlayerHandle.cs" />
     <Compile Include="Handle\TeamHandle.cs" />
     <Compile Include="Param\BRBaseParam.cs" />

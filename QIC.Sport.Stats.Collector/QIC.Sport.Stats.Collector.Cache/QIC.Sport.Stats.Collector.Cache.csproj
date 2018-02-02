@@ -41,8 +41,26 @@
   <ItemGroup>
     <Compile Include="BaseCacheEntity.cs" />
     <Compile Include="BaseCacheManager.cs" />
+    <Compile Include="CacheDataManager\LeagueEntityManager.cs" />
+    <Compile Include="CacheDataManager\MatchEntityManager.cs" />
+    <Compile Include="CacheDataManager\PlayerEntityManager.cs" />
+    <Compile Include="CacheDataManager\PlayerStatisticsRecordManager.cs" />
+    <Compile Include="CacheDataManager\PlayerTimeRecordManager.cs" />
+    <Compile Include="CacheDataManager\TeamEntityManager.cs" />
+    <Compile Include="CacheDataManager\TeamPlayersManager.cs" />
+    <Compile Include="CacheData\LeagueEntity.cs" />
     <Compile Include="CacheDataManager\OrganizerEntityManager.cs" />
+    <Compile Include="CacheData\MatchEntity.cs" />
+    <Compile Include="CacheData\MatchResultEntity.cs" />
     <Compile Include="CacheData\OrganizerEntity.cs" />
+    <Compile Include="CacheData\PlayerEntity.cs" />
+    <Compile Include="CacheData\PlayerStatisticsRecord.cs" />
+    <Compile Include="CacheData\PlayerTimeRecord.cs" />
+    <Compile Include="CacheData\SeasonEntity.cs" />
+    <Compile Include="CacheData\TeamEntity.cs" />
+    <Compile Include="CacheData\TeamPlayers.cs" />
+    <Compile Include="CombinedData\SeasonRank.cs" />
+    <Compile Include="CombinedData\SeasonTopScorePlayer.cs" />
     <Compile Include="ICacheManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

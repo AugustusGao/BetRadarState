@@ -34,7 +34,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
             var jd2 = root.SelectSingleNode("//li[@class='topelem sport-1']/ul[@class=' jdlvl_2']");
 
-            var cacheManager = IocUnity.GetService<ICacheManager>("OrganizerEntityManager");
+            var cacheOrganizer = IocUnity.GetService<ICacheManager>("OrganizerEntityManager");
+            var cacheLeague = IocUnity.GetService<ICacheManager>("LeagueEntityManager");
+
             List<HtmlNode> needNodes = new List<HtmlNode>();
             foreach (var c2 in jd2.ChildNodes)
             {
@@ -70,14 +72,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (i == 2) //  标题行的处理
                         {
                             var key = "393";
-                            oe = (OrganizerEntity)cacheManager.AddOrGetCacheEntity(key);
+                            oe = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(key);
                             oe.OrganizerId = key;
                             oe.OrganizerName = n3.ChildNodes[0].InnerText;
                             oe.ContinentId = continentId;
                             oe.ContinentName = continentName;
 
                             key = "4";
-                            oe = (OrganizerEntity)cacheManager.AddOrGetCacheEntity(key);
+                            oe = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(key);
                             oe.OrganizerId = key;
                             oe.OrganizerName = n2.ChildNodes[0].InnerText;
                             oe.ContinentId = continentId;
@@ -91,6 +93,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a2 != null)
                         {
                             var seasonId = RegGetStr(a2.Value, "seasonid','", "',");
+                            LeagueEntity le = (LeagueEntity)cacheLeague.AddOrGetCacheEntity(n2.InnerText);
+                            le.LeagueName = n2.InnerText;
+                            le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
                             {
                                 dic["4"].Add(seasonId);
@@ -102,6 +107,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a3 != null)
                         {
                             var seasonId = RegGetStr(a3.Value, "seasonid','", "',");
+                            LeagueEntity le = (LeagueEntity)cacheLeague.AddOrGetCacheEntity(n3.InnerText);
+                            le.LeagueName = n3.InnerText;
+                            le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
                             {
                                 dic["393"].Add(seasonId);
@@ -112,7 +120,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
                 foreach (var kv in dic)
                 {
-                    var oe = (OrganizerEntity)cacheManager.AddOrGetCacheEntity(kv.Key);
+                    var oe = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(kv.Key);
                     var cpDic = oe.CompareSeasonIds(kv.Value);
                     NextAssignTask(oe, cpDic);
                 }
@@ -144,7 +152,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     var a = node.ChildNodes[0];
                     var organizerId = RegGetStr(a.Attributes["href"].Value, "3_", ",");
                     var organizerName = a.InnerText;
-                    OrganizerEntity ent = (OrganizerEntity)cacheManager.AddOrGetCacheEntity(organizerId);
+                    OrganizerEntity ent = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(organizerId);
                     ent.ContinentId = continentId;
                     ent.ContinentName = continentName;
                     ent.OrganizerId = organizerId;
@@ -157,6 +165,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         var s = ul.ChildNodes[0].Attributes["href"].Value;
                         var seasonId = RegGetStr(s, "seasonid','", "',");
+                        LeagueEntity le = (LeagueEntity)cacheLeague.AddOrGetCacheEntity(ul.InnerText);
+                        le.LeagueName = ul.InnerText;
+                        le.AddSeasonId(seasonId, true);
                         list.Add(seasonId);
                     }
                     var cpDic = ent.CompareSeasonIds(list);
@@ -175,7 +186,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 {
                     foreach (var sid in kv.Value)
                     {
-                        LeagueParam lp = new LeagueParam()
+                        SeasonParam sp = new SeasonParam()
                         {
                             SeasonId = sid,
                             SportId = entity.SportId,
@@ -185,21 +196,21 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
                         //  todo 测试只加入西班牙的联赛任务
                         if (sid == "42556")
-                            leagueManager.AddOrUpdateParam(lp);
+                            leagueManager.AddOrUpdateParam(sp);
                     }
                 }
                 else if (kv.Key == "del")
                 {
                     foreach (var sid in kv.Value)
                     {
-                        LeagueParam lp = new LeagueParam()
+                        SeasonParam sp = new SeasonParam()
                         {
                             SeasonId = sid,
                             SportId = entity.SportId,
                             ContinentId = entity.ContinentId,
                             OrganizerId = entity.OrganizerId
                         };
-                        leagueManager.RemoveParam(lp);
+                        leagueManager.RemoveParam(sp);
                     }
                 }
             }

@@ -9,7 +9,7 @@ using QIC.Sport.Stats.Collector.BetRadar;
 
 namespace QIC.Sport.Stats.Collector.BetRadar.Param
 {
-    public class LeagueParam : BRBaseParam
+    public class SeasonParam : BRBaseParam
     {
         private string topRankUrl = "gismo.php?&html=1&id=2099&language=zh&clientid=4&state=2_{0}%2C3_{2}%2C22_{1}%2C5_{3}%2C9_overview%2C25_1&child=3";
         public string SeasonId;
@@ -17,9 +17,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Param
         public string OrganizerId;
         public string SportId = "1";
 
-        public LeagueParam()
+        public SeasonParam()
         {
-            HandleType = (int)RBHandleType.League;
+            HandleType = (int)RBHandleType.Season;
         }
 
         public override string GetUrl()

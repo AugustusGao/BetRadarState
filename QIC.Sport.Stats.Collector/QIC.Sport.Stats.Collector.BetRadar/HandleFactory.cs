@@ -18,8 +18,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar
                 case RBHandleType.Organizer:
                     handle = new OrganizerHandle();
                     break;
-                case RBHandleType.League:
-                    handle = new LeagueHandle();
+                case RBHandleType.Season:
+                    handle = new SeasonHandle();
                     break;
                 default:
                     handle = null;

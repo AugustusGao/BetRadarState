@@ -10,7 +10,11 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
     {
         public void Process(ITakerReptile.Dto.BaseData data)
         {
-            throw new NotImplementedException();
+            //  解析球员基本信息
+
+            //  解析全部参赛记录
+
+            //  如果有添加获取转会记录的任务
         }
     }
 }

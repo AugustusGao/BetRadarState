@@ -25,6 +25,5 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheDataManager
         {
             throw new NotImplementedException();
         }
-
     }
 }
