@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml;
 using HtmlAgilityPack;
-using Microsoft.Practices.ObjectBuilder2;
 using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;

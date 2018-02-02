@@ -2,3 +2,7 @@ E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Colle
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb
+F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
+F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
+F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
+F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb
