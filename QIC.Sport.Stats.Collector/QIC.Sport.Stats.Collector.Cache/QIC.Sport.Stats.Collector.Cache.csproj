@@ -57,6 +57,8 @@
     <Compile Include="CacheData\PlayerStatisticsRecord.cs" />
     <Compile Include="CacheData\PlayerTimeRecord.cs" />
     <Compile Include="CacheData\SeasonEntity.cs" />
+    <Compile Include="CacheData\SeasonPalyers.cs" />
+    <Compile Include="CacheData\SeasonTeams.cs" />
     <Compile Include="CacheData\TeamEntity.cs" />
     <Compile Include="CacheData\TeamPlayers.cs" />
     <Compile Include="CombinedData\SeasonRank.cs" />

@@ -7,3 +7,7 @@ F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Comm
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.csprojResolveAssemblyReference.cache
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb

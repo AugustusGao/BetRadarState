@@ -18,3 +18,12 @@ F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITak
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.csprojResolveAssemblyReference.cache
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Cache.dll
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Cache.pdb
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.csprojResolveAssemblyReference.cache
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
+F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
