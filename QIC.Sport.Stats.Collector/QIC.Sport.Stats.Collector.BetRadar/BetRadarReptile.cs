@@ -49,13 +49,44 @@ namespace QIC.Sport.Stats.Collector.BetRadar
         public override void InitCacheManager()
         {
             var organizerEntityManager = new OrganizerEntityManager();
-            IocUnity.RegisterInstance<ICacheManager>("OrganizerEntityManager", organizerEntityManager);
+            IocUnity.RegisterInstance<ICacheManager>(typeof(OrganizerEntityManager).Name, organizerEntityManager);
             DicCacheManagers.Add(typeof(OrganizerEntityManager).Name, (ICacheManager)organizerEntityManager);
 
             var leagueEntityManager = new LeagueEntityManager();
-            IocUnity.RegisterInstance<ICacheManager>("LeagueEntityManager", leagueEntityManager);
+            IocUnity.RegisterInstance<ICacheManager>(typeof(LeagueEntityManager).Name, leagueEntityManager);
             DicCacheManagers.Add(typeof(LeagueEntityManager).Name, (ICacheManager)leagueEntityManager);
 
+            var matchEntityManager = new MatchEntityManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(MatchEntityManager).Name, matchEntityManager);
+            DicCacheManagers.Add(typeof(MatchEntityManager).Name, (ICacheManager)matchEntityManager);
+
+            var playerEntityManager = new PlayerEntityManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(PlayerEntityManager).Name, playerEntityManager);
+            DicCacheManagers.Add(typeof(PlayerEntityManager).Name, (ICacheManager)playerEntityManager);
+
+            var playerPenaltiesManager = new PlayerPenaltiesManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(PlayerPenaltiesManager).Name, playerPenaltiesManager);
+            DicCacheManagers.Add(typeof(PlayerPenaltiesManager).Name, (ICacheManager)playerPenaltiesManager);
+
+            var PlayerStatisticsRecordManager = new PlayerStatisticsRecordManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(PlayerStatisticsRecordManager).Name, PlayerStatisticsRecordManager);
+            DicCacheManagers.Add(typeof(PlayerStatisticsRecordManager).Name, (ICacheManager)PlayerStatisticsRecordManager);
+
+            var playerTimeRecordManager = new PlayerTimeRecordManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(PlayerTimeRecordManager).Name, playerTimeRecordManager);
+            DicCacheManagers.Add(typeof(PlayerTimeRecordManager).Name, (ICacheManager)playerTimeRecordManager);
+
+            var seasonEntityManager = new SeasonEntityManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(SeasonEntityManager).Name, seasonEntityManager);
+            DicCacheManagers.Add(typeof(SeasonEntityManager).Name, (ICacheManager)seasonEntityManager);
+
+            var teamEntityManager = new TeamEntityManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(TeamEntityManager).Name, teamEntityManager);
+            DicCacheManagers.Add(typeof(TeamEntityManager).Name, (ICacheManager)teamEntityManager);
+
+            var teamPlayersManager = new TeamPlayersManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(TeamPlayersManager).Name, teamPlayersManager);
+            DicCacheManagers.Add(typeof(TeamPlayersManager).Name, (ICacheManager)teamPlayersManager);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
     /// <summary>
     /// 队伍在不同赛季下的队员信息
     /// </summary>
-    public class TeamPlayers
+    public class TeamPlayers : BaseCacheEntity
     {
         public string SeasonId;
         public string TeamId;

@@ -1,0 +1,59 @@
+[Header]------
+2018-02-03 17:27:58,933 [12] ERROR QIC.Sport.Stats.Collector.BetRadar.Manager.LeagueManager - System.AggregateException: 发生一个或多个错误。 ---> Microsoft.Practices.Unity.ResolutionFailedException: Resolution of the dependency failed, type = "ML.Infrastructure.Caching.ICacheManager", name = "OrganizerEntityManager".
+Exception occurred while: while resolving.
+Exception is: InvalidOperationException - The current type, ML.Infrastructure.Caching.ICacheManager, is an interface and cannot be constructed. Are you missing a type mapping?
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving ML.Infrastructure.Caching.ICacheManager,OrganizerEntityManager
+ ---> System.InvalidOperationException: The current type, ML.Infrastructure.Caching.ICacheManager, is an interface and cannot be constructed. Are you missing a type mapping?
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodConstructorStrategy.ThrowForAttemptingToConstructInterface(IBuilderContext context)
+   在 lambda_method(Closure , IBuilderContext )
+   在 Microsoft.Practices.ObjectBuilder2.DynamicBuildPlanGenerationContext.<>c__DisplayClass1.<GetBuildMethod>b__0(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodBuildPlan.BuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.BuildPlanStrategy.PreBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.StrategyChain.ExecuteBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.Resolve(Type t, String name, ResolverOverride[] resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainerExtensions.Resolve[T](IUnityContainer container, String name, ResolverOverride[] overrides)
+   在 ML.Infrastructure.IOC.IocUnity.GetService[T](String name)
+   在 QIC.Sport.Stats.Collector.BetRadar.Handle.SeasonHandle.Process(BaseData data) 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\Handle\SeasonHandle.cs:行号 33
+   在 QIC.Sport.Stats.Collector.BetRadar.Manager.LeagueManager.ProcessData(BaseData data) 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\Manager\LeagueManager.cs:行号 42
+   在 QIC.Sport.Stats.Collector.ITakerReptile.BaseWorkManager.<>c__DisplayClass4.<EnQueueData>b__3() 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\BaseWorkManager.cs:行号 68
+   在 System.Threading.Tasks.Task.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Threading.Tasks.Task.WaitAll(Task[] tasks, Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   在 System.Threading.Tasks.Task.WaitAll(Task[] tasks, Int32 millisecondsTimeout)
+   在 System.Threading.Tasks.Task.WaitAll(Task[] tasks)
+   在 QIC.Sport.Stats.Collector.ITakerReptile.BaseWorkManager.Work() 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\BaseWorkManager.cs:行号 120
+---> (内部异常 #0) Microsoft.Practices.Unity.ResolutionFailedException: Resolution of the dependency failed, type = "ML.Infrastructure.Caching.ICacheManager", name = "OrganizerEntityManager".
+Exception occurred while: while resolving.
+Exception is: InvalidOperationException - The current type, ML.Infrastructure.Caching.ICacheManager, is an interface and cannot be constructed. Are you missing a type mapping?
+-----------------------------------------------
+At the time of the exception, the container was:
+
+  Resolving ML.Infrastructure.Caching.ICacheManager,OrganizerEntityManager
+ ---> System.InvalidOperationException: The current type, ML.Infrastructure.Caching.ICacheManager, is an interface and cannot be constructed. Are you missing a type mapping?
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodConstructorStrategy.ThrowForAttemptingToConstructInterface(IBuilderContext context)
+   在 lambda_method(Closure , IBuilderContext )
+   在 Microsoft.Practices.ObjectBuilder2.DynamicBuildPlanGenerationContext.<>c__DisplayClass1.<GetBuildMethod>b__0(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.DynamicMethodBuildPlan.BuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.BuildPlanStrategy.PreBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.ObjectBuilder2.StrategyChain.ExecuteBuildUp(IBuilderContext context)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, Object existing, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.DoBuildUp(Type t, String name, IEnumerable`1 resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainer.Resolve(Type t, String name, ResolverOverride[] resolverOverrides)
+   在 Microsoft.Practices.Unity.UnityContainerExtensions.Resolve[T](IUnityContainer container, String name, ResolverOverride[] overrides)
+   在 ML.Infrastructure.IOC.IocUnity.GetService[T](String name)
+   在 QIC.Sport.Stats.Collector.BetRadar.Handle.SeasonHandle.Process(BaseData data) 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\Handle\SeasonHandle.cs:行号 33
+   在 QIC.Sport.Stats.Collector.BetRadar.Manager.LeagueManager.ProcessData(BaseData data) 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\Manager\LeagueManager.cs:行号 42
+   在 QIC.Sport.Stats.Collector.ITakerReptile.BaseWorkManager.<>c__DisplayClass4.<EnQueueData>b__3() 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\BaseWorkManager.cs:行号 68
+   在 System.Threading.Tasks.Task.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()<---
+

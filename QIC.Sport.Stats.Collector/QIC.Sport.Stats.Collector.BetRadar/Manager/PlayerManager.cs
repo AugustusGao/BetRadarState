@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using ML.Infrastructure.IOC;
+using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.ITakerReptile;
 using QIC.Sport.Stats.Collector.ITakerReptile.Dto;
 
@@ -14,9 +15,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Manager
     {
         public override void ExecuteTask(BaseParam param)
         {
-            EnQueueData(new BaseData());
-            logger.Debug("PlayerManager ExecuteTask");
-            //base.ExecuteTask(param);
+            BRBaseParam bp = param as BRBaseParam;
+
+            var url = bp.GetUrl();
+
+            var html = RequestPage(url);
+
+            BRData data = new BRData() { Param = param, Html = html };
+            EnQueueData(data);
         }
 
         public override void ProcessData(BaseData data)

@@ -1,7 +1,3 @@
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
-E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
 F:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.csprojResolveAssemblyReference.cache
@@ -11,3 +7,7 @@ F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Col
 F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
 F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
 F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Common\obj\Debug\QIC.Sport.Stats.Collector.Common.pdb

@@ -10,5 +10,10 @@ namespace QIC.Sport.Stats.Collector.BetRadar
     {
         Organizer,              //  国家组织
         Season,                 //  赛季
+        Match,
+        Team,
+        Player,
+        Injury,
+        PlayerTransfer,
     }
 }

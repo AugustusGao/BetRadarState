@@ -9,7 +9,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CombinedData
     /// <summary>
     /// 积分榜,其他信息可由teamid获得
     /// </summary>
-    public class SeasonRank
+    public class TeamRank
     {
         public string SeasonId;
         public string TeamId;

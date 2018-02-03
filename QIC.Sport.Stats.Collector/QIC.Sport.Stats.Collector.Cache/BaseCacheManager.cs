@@ -10,5 +10,6 @@ namespace QIC.Sport.Stats.Collector.Cache
     public class BaseCacheManager
     {
         protected ConcurrentDictionary<string, BaseCacheEntity> DicCacheData = new ConcurrentDictionary<string, BaseCacheEntity>();
+
     }
 }

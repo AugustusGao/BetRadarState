@@ -21,6 +21,18 @@ namespace QIC.Sport.Stats.Collector.BetRadar
                 case RBHandleType.Season:
                     handle = new SeasonHandle();
                     break;
+                case RBHandleType.Team:
+                    handle = new TeamHandle();
+                    break;
+                case RBHandleType.Match:
+                    handle = new MatchHandle();
+                    break;
+                case RBHandleType.Player:
+                    handle = new PlayerHandle();
+                    break;
+                case RBHandleType.PlayerTransfer:
+                    handle = new PlayerTransferHandle();
+                    break;
                 default:
                     handle = null;
                     break;

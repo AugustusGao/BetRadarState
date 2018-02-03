@@ -11,8 +11,15 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Param
 {
     public class BRBaseParam : BaseParam
     {
-        public string BaseUrl = "http://www.stats.betradar.com/s4/";
-        public virtual string GetUrl() { return null; }
+        protected string BaseUrl = "http://www.stats.betradar.com/s4/";
+        protected string CustomUrl;
+        public string SportId = "1";
+        public string ContinentId;
+        public string OrganizerId;
+        public string SeasonId;
+        public string TeamId;
+        public string PlayerId;
+
         protected string EncryptToSHA1(string str)
         {
             try
@@ -29,6 +36,21 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Param
             {
                 throw new Exception("SHA1 Encrypt Error" + ex.Message);
             }
+        }
+        public virtual string GetUrl() { return null; }
+
+        public T CopyBaseParam<T>() where T : BRBaseParam, new()
+        {
+            var t = new T()
+            {
+                SportId = "1",
+                ContinentId = ContinentId,
+                OrganizerId = OrganizerId,
+                SeasonId = SeasonId,
+                TeamId = TeamId,
+                PlayerId = PlayerId,
+            };
+            return t;
         }
     }
 }

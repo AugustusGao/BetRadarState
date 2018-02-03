@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QIC.Sport.Stats.Collector.Cache.CacheData
 {
-    public class MatchResultEntity
+    public class MatchResultEntity : BaseCacheEntity
     {
         public string MatchId;
         public string SportId;

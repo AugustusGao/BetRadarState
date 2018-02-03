@@ -13,6 +13,7 @@ using QIC.Sport.Stats.Collector.Cache.CacheData;
 using QIC.Sport.Stats.Collector.Common;
 using QIC.Sport.Stats.Collector.ITakerReptile;
 using QIC.Sport.Stats.Collector.ITakerReptile.Dto;
+using ICacheManager = QIC.Sport.Stats.Collector.Cache.ICacheManager;
 
 namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 {
@@ -177,7 +178,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             }
         }
 
-        public void NextAssignTask(OrganizerEntity entity, Dictionary<string, List<string>> taskDic)
+        private void NextAssignTask(OrganizerEntity entity, Dictionary<string, List<string>> taskDic)
         {
             var leagueManager = IocUnity.GetService<IWorkManager>("LeagueManager");
             foreach (var kv in taskDic)

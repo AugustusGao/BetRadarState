@@ -52,9 +52,8 @@
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ML.Infrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\Work\QIC\lib\ML.Infrastructure.dll</HintPath>
+    <Reference Include="ML.Infrastructure">
+      <HintPath>..\..\..\..\lib\ML.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="ML.NetComponent">
       <HintPath>..\..\..\..\lib\ML.NetComponent.dll</HintPath>
@@ -71,8 +70,9 @@
   <ItemGroup>
     <Compile Include="BRData.cs" />
     <Compile Include="HandleType.cs" />
-    <Compile Include="Handle\AssistsHandle.cs" />
-    <Compile Include="Handle\CardHandle.cs" />
+    <Compile Include="Handle\InjuryHandle.cs" />
+    <Compile Include="Handle\MatchHandle.cs" />
+    <Compile Include="Handle\PlayerTransferHandle.cs" />
     <Compile Include="Handle\SeasonHandle.cs" />
     <Compile Include="Handle\PlayerHandle.cs" />
     <Compile Include="Handle\TeamHandle.cs" />
@@ -83,7 +83,10 @@
     <Compile Include="IHandle.cs" />
     <Compile Include="Handle\OrganizerHandle.cs" />
     <Compile Include="Manager\LeagueManager.cs" />
-    <Compile Include="Param\LeagueParam.cs" />
+    <Compile Include="Param\InjuryParam.cs" />
+    <Compile Include="Param\MatchParam.cs" />
+    <Compile Include="Param\PlayerTransferParam.cs" />
+    <Compile Include="Param\SeasonParam.cs" />
     <Compile Include="Manager\OrganizerManager.cs" />
     <Compile Include="Param\OrganizerParam.cs" />
     <Compile Include="Manager\PlayerManager.cs" />
