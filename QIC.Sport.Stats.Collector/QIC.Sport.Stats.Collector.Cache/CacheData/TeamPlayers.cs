@@ -17,7 +17,20 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public Dictionary<string, string> CardPlayerDic = new Dictionary<string, string>();    //  kv = 名次--PlayerId
         public Dictionary<string, string> AssistsPlayerDic = new Dictionary<string, string>();    //  kv = 名次--PlayerId
         public Dictionary<string, InjurePlayer> InjurePlayerDic = new Dictionary<string, InjurePlayer>();    //  kv = PlayerId--伤停状态描述
-        public List<string> AllPlayerList = new List<string>();
+        public List<string> AllPlayerIdList = new List<string>();   //  球队名单
+        public Dictionary<string, List<string>> ComparePlayerIdList(List<string> list)
+        {
+            var adds = list.Except(AllPlayerIdList).ToList();
+            var dels = AllPlayerIdList.Except(list).ToList();
+
+            AllPlayerIdList = list;
+            return new Dictionary<string, List<string>> { { "add", adds }, { "del", dels } };
+        }
+
+        public override string GetKey()
+        {
+            return TeamId + "_" + SeasonId;
+        }
     }
 
     public class InjurePlayer

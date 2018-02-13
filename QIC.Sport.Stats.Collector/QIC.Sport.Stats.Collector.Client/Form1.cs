@@ -14,6 +14,9 @@ using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.Common;
 using QIC.Sport.Stats.Collector.ITakerReptile;
 using HtmlAgilityPack;
+using QIC.Sport.Stats.Collector.BetRadar;
+using QIC.Sport.Stats.Collector.BetRadar.Handle;
+using QIC.Sport.Stats.Collector.BetRadar.Param;
 
 namespace QIC.Sport.Stats.Collector.Client
 {
@@ -25,6 +28,8 @@ namespace QIC.Sport.Stats.Collector.Client
             InitializeComponent();
             tw = new TextBoxWriter(this.textBox1);
             #region Test
+
+            HandleProcessTest();
 
             //var path = @"C:\Users\Gaushee\Desktop\temp.txt";
             //var data = File.ReadAllText(path);
@@ -67,6 +72,25 @@ namespace QIC.Sport.Stats.Collector.Client
 
             #endregion
 
+        }
+
+        private void HandleProcessTest()
+        {
+            Console.SetOut(tw);
+            var type = ConfigSingleton.CreateInstance().GetAppConfig<string>("ReptileType");
+
+            IReptile r = IocUnity.GetService<IReptile>(type);
+
+            var ph = new TeamHandle();
+
+            var path = @"C:\Users\Gaushee\Desktop\555.txt";
+            var txt = File.ReadAllText(path);
+            var data = new BRData
+            {
+                Param = new TeamParam(){TeamId = "223423",PlayerId = "12334"},
+                Html = txt
+            };
+            ph.Process(data);
         }
 
         private void btnStart_Click(object sender, EventArgs e)

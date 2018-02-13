@@ -32,11 +32,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var title = xml.GetAttributeValue("//page", "title");
             var seasonName = title.Split('>').Last();
 
-            var cacheOrganizer = IocUnity.GetService<ICacheManager>("OrganizerEntityManager");
-            var ss = IocUnity.GetService<ICacheManager>(typeof(SeasonEntityManager).Name);
-
             SeasonEntityManager sem = (SeasonEntityManager)IocUnity.GetService<ICacheManager>(typeof(SeasonEntityManager).Name);
-            SeasonEntity se = (SeasonEntity)sem.AddOrGetCacheEntity(param.SeasonId);
+            SeasonEntity se = sem.AddOrGetCacheEntity<SeasonEntity>(param.SeasonId);
             se.SeasonName = seasonName;
 
             //  获取积分数据块
@@ -68,10 +65,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 se.AddOrUpdateTeamRank(tr);
             }
 
-
             //  要分配的队伍任务
             var teamTaskDic = se.CompareTeamIdList(teamIdList);
             NextAssignTask(param, teamTaskDic);
+
+            //  添加联赛层级的比赛任务
+            MatchParam mp = param.CopyBaseParam<MatchParam>();
+            IWorkManager sm = IocUnity.GetService<IWorkManager>(typeof(LeagueManager).Name);
+            sm.AddOrUpdateParam(mp);
         }
 
         //  分配任务

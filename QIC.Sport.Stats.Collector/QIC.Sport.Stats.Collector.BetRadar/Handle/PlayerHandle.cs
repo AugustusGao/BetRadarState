@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using ML.Infrastructure.IOC;
+using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
+using QIC.Sport.Stats.Collector.Cache.CacheData;
+using QIC.Sport.Stats.Collector.Cache.CacheDataManager;
+using QIC.Sport.Stats.Collector.Common;
 using ICacheManager = QIC.Sport.Stats.Collector.Cache.ICacheManager;
 
 namespace QIC.Sport.Stats.Collector.BetRadar.Handle
@@ -12,12 +18,90 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
     {
         public void Process(ITakerReptile.Dto.BaseData data)
         {
+            BRData bd = data as BRData;
+            PlayerParam param = bd.Param as PlayerParam;
+
+            var txt = HttpUtility.HtmlDecode(bd.Html);
+
+            var xml = new XmlHelper(txt);
+
+            //  解析成各个数据块
+            var cdataFlag = "//c";
+            var cdata = xml.GetValues(cdataFlag);
+
             //  解析球员基本信息
+            var playerInfo = cdata[1];
+            var root = GetHtmlRoot(playerInfo);
+            var tbody = root.SelectSingleNode("//div[@class='multiview_wrap']/table/tbody");
+            var tds = tbody.SelectNodes("tr/td[@class='last ']");
+            var tdCount = tds.Count;
+            if (tdCount >= 10)
+            {
+                var currentPlayerEntity = new PlayerEntity()
+                {
+                    PlayerId = param.PlayerId,
+                    FullName = tds[0].InnerText,
+                    Country = tds[1].InnerText,
+                    SecondaryCountry = tdCount == 11 ? tds[2].InnerText : "",
+                    Birth = tds[tdCount - 8].InnerText,
+                    Age = tds[tdCount - 7].InnerText,
+                    Height = tds[tdCount - 6].InnerText,
+                    Weight = tds[tdCount - 5].InnerText,
+                    Position = tds[tdCount - 4].InnerText,
+                    ShirtNumber = tds[tdCount - 3].InnerText,
+                    TeamName = tds[tdCount - 2].InnerText,
+                    PreferredFoot = tds[tdCount - 1].InnerText,
+                };
+
+                var peManager = IocUnity.GetService<ICacheManager>(typeof(PlayerEntityManager).Name);
+                var pe = peManager.AddOrGetCacheEntity<PlayerEntity>(param.PlayerId);
+                pe.CompareInfo(currentPlayerEntity);
+            }
+            else
+            {
+                //  todo 队员信息很少的情况
+            }
 
             //  解析全部参赛记录
             //  记录比赛Id
             //  缓存出场信息PlayerTimeRecord
             //  缓存进球，牌，助攻信息PlayerStatisticsRecord
+            var recordData = cdata[2];
+            root = GetHtmlRoot(recordData);
+            var tbodys = root.SelectNodes("//tbody");
+
+            var psRecordCache = IocUnity.GetService<ICacheManager>(typeof(PlayerStatisticsRecordManager).Name);
+            var ptRecordCache = IocUnity.GetService<ICacheManager>(typeof(PlayerTimeRecordManager).Name);
+
+            foreach (var tb in tbodys)
+            {
+                foreach (var node in tb.ChildNodes)
+                {
+                    var scoreStr = node.SelectSingleNode("td[@class='score']");
+                    if (string.IsNullOrEmpty(scoreStr.InnerHtml)) continue;
+                    var matchId = RegGetStr(scoreStr.InnerHtml, "matchid','", "\'");
+                    var nowPsr = new PlayerStatisticsRecord();
+                    nowPsr.MatchId = matchId;
+                    nowPsr.PlayerId = param.PlayerId;
+                    nowPsr.Goals = Convert.ToInt32(node.SelectSingleNode("td[@class='goals']").InnerText);
+                    nowPsr.Assists = Convert.ToInt32(node.SelectSingleNode("td[@class='assists']").InnerText);
+                    nowPsr.YellowCard = Convert.ToInt32(node.SelectSingleNode("td[@class='yellow']").InnerText);
+                    nowPsr.YellowRedCard = Convert.ToInt32(node.SelectSingleNode("td[@class='yellowred']").InnerText);
+                    nowPsr.RedCard = Convert.ToInt32(node.SelectSingleNode("td[@class='red last']").InnerText);
+                    var psr = psRecordCache.AddOrGetCacheEntity<PlayerStatisticsRecord>(param.PlayerId + "_" + matchId);
+                    psr.Compare(nowPsr);
+
+                    var nowPtr = new PlayerTimeRecord();
+                    nowPtr.MatchId = matchId;
+                    nowPtr.PlayerId = param.PlayerId;
+                    nowPtr.IsStarting = Convert.ToInt32(node.SelectSingleNode("td[@class='started']").InnerText) == 1;
+                    nowPtr.IsInPlay = Convert.ToInt32(node.SelectSingleNode("td[@class='in']").InnerText) == 1;
+                    nowPtr.IsOutPlay = Convert.ToInt32(node.SelectSingleNode("td[@class='out']").InnerText) == 1;
+                    nowPtr.MinutesPlayed = Convert.ToInt32(node.SelectSingleNode("td[@class='min']").InnerText);
+                    var ptr = ptRecordCache.AddOrGetCacheEntity<PlayerTimeRecord>(param.PlayerId + "_" + matchId);
+                    ptr.Compare(nowPtr);
+                }
+            }
 
 
             //  如果有添加获取转会记录的任务

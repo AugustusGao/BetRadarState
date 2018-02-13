@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QIC.Sport.Stats.Collector.Cache.CacheData
 {
-    class PlayerTimeRecord : BaseCacheEntity
+    public class PlayerTimeRecord : BaseCacheEntity
     {
         public string MatchId;
         public string PlayerId;
@@ -14,5 +14,17 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public bool IsInPlay;
         public bool IsOutPlay;
         public int MinutesPlayed;
+
+        public void Compare(PlayerTimeRecord record)
+        {
+            if (this.Equal(record)) return;
+
+            MatchId = record.MatchId;
+            PlayerId = record.PlayerId;
+            IsStarting = record.IsStarting;
+            IsInPlay = record.IsInPlay;
+            IsOutPlay = record.IsOutPlay;
+            MinutesPlayed = record.MinutesPlayed;
+        }
     }
 }

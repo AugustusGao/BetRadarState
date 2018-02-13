@@ -6,15 +6,33 @@ using System.Threading.Tasks;
 
 namespace QIC.Sport.Stats.Collector.Cache.CacheData
 {
-    class PlayerStatisticsRecord:BaseCacheEntity
+    public class PlayerStatisticsRecord : BaseCacheEntity
     {
-        public int MatchId;
-        public int PlayerId;
+        public string MatchId;
+        public string PlayerId;
         public int Goals;
         public int Assists;
         public int Penalties;
         public int YellowCard;
         public int YellowRedCard;
         public int RedCard;
+
+        public void Compare(PlayerStatisticsRecord record)
+        {
+            if (this.Equal(record)) return;
+            MatchId = record.MatchId;
+            PlayerId = record.PlayerId;
+            Goals = record.Goals;
+            Assists = record.Assists;
+            Penalties = record.Penalties;
+            YellowCard = record.YellowCard;
+            YellowRedCard = record.YellowRedCard;
+            RedCard = record.RedCard;
+        }
+
+        public override string GetKey()
+        {
+            return PlayerId + "_" + MatchId;
+        }
     }
 }

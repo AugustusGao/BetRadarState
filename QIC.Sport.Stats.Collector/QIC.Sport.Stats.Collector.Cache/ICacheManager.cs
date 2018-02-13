@@ -8,7 +8,7 @@ namespace QIC.Sport.Stats.Collector.Cache
 {
     public interface ICacheManager
     {
-        BaseCacheEntity AddOrGetCacheEntity(string key);
-        void Remove(BaseCacheEntity entity);
+        T AddOrGetCacheEntity<T>(string key) where T : BaseCacheEntity, new();
+        void Remove(string key);
     }
 }

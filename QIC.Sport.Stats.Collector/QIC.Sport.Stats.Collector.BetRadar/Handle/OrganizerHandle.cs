@@ -73,14 +73,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (i == 2) //  标题行的处理
                         {
                             var key = "393";
-                            oe = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(key);
+                            oe = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(key);
                             oe.OrganizerId = key;
                             oe.OrganizerName = n3.ChildNodes[0].InnerText;
                             oe.ContinentId = continentId;
                             oe.ContinentName = continentName;
 
                             key = "4";
-                            oe = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(key);
+                            oe = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(key);
                             oe.OrganizerId = key;
                             oe.OrganizerName = n2.ChildNodes[0].InnerText;
                             oe.ContinentId = continentId;
@@ -94,7 +94,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a2 != null)
                         {
                             var seasonId = RegGetStr(a2.Value, "seasonid','", "',");
-                            LeagueEntity le = (LeagueEntity)cacheLeague.AddOrGetCacheEntity(n2.InnerText);
+                            LeagueEntity le = cacheLeague.AddOrGetCacheEntity<LeagueEntity>(n2.InnerText);
                             le.LeagueName = n2.InnerText;
                             le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
@@ -108,7 +108,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a3 != null)
                         {
                             var seasonId = RegGetStr(a3.Value, "seasonid','", "',");
-                            LeagueEntity le = (LeagueEntity)cacheLeague.AddOrGetCacheEntity(n3.InnerText);
+                            LeagueEntity le = cacheLeague.AddOrGetCacheEntity<LeagueEntity>(n3.InnerText);
                             le.LeagueName = n3.InnerText;
                             le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
@@ -121,7 +121,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
                 foreach (var kv in dic)
                 {
-                    var oe = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(kv.Key);
+                    var oe = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(kv.Key);
                     var cpDic = oe.CompareSeasonIds(kv.Value);
                     NextAssignTask(oe, cpDic);
                 }
@@ -153,7 +153,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     var a = node.ChildNodes[0];
                     var organizerId = RegGetStr(a.Attributes["href"].Value, "3_", ",");
                     var organizerName = a.InnerText;
-                    OrganizerEntity ent = (OrganizerEntity)cacheOrganizer.AddOrGetCacheEntity(organizerId);
+                    OrganizerEntity ent = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(organizerId);
                     ent.ContinentId = continentId;
                     ent.ContinentName = continentName;
                     ent.OrganizerId = organizerId;
@@ -166,7 +166,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         var s = ul.ChildNodes[0].Attributes["href"].Value;
                         var seasonId = RegGetStr(s, "seasonid','", "',");
-                        LeagueEntity le = (LeagueEntity)cacheLeague.AddOrGetCacheEntity(ul.InnerText);
+                        LeagueEntity le = cacheLeague.AddOrGetCacheEntity<LeagueEntity>(ul.InnerText);
                         le.LeagueName = ul.InnerText;
                         le.AddSeasonId(seasonId, true);
                         list.Add(seasonId);
@@ -197,7 +197,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
                         //  todo 测试只加入西班牙的联赛任务
                         if (sid == "42556")
-                            leagueManager.AddOrUpdateParam(sp);
+                        leagueManager.AddOrUpdateParam(sp);
                     }
                 }
                 else if (kv.Key == "del")

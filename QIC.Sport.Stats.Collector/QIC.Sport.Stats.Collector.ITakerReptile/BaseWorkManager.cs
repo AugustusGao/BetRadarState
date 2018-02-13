@@ -23,7 +23,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
         private bool isCompleted;
         private Thread workThread;
 
-        private static readonly LimitedConcurrencyLevelTaskScheduler executerScheduler = new LimitedConcurrencyLevelTaskScheduler(2);
+        private static readonly LimitedConcurrencyLevelTaskScheduler executerScheduler = new LimitedConcurrencyLevelTaskScheduler(10);
         private static readonly TaskFactory executerFactory = new TaskFactory(executerScheduler);
         private static readonly LimitedConcurrencyLevelTaskScheduler processerScheduler = new LimitedConcurrencyLevelTaskScheduler(2);
         private static readonly TaskFactory processerFactory = new TaskFactory(processerScheduler);

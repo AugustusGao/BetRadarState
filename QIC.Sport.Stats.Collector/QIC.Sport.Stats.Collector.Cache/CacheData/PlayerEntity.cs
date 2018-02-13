@@ -8,11 +8,11 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
 {
     public class PlayerEntity : BaseCacheEntity
     {
-        public int PlayerId;
+        public string PlayerId;
         public string FullName;
         public string Country;
         public string SecondaryCountry;
-        public DateTime Birth;
+        public string Birth;
         public string Age;
         public string Height;
         public string Weight;
@@ -21,6 +21,45 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string TeamName;
         public string PreferredFoot;
         public List<TransferHistory> TransferHistorys;
+
+        public void CompareInfo(PlayerEntity pe)
+        {
+            if (this.Equal(pe)) return;
+
+            FullName = pe.FullName;
+            Country = pe.Country;
+            SecondaryCountry = pe.SecondaryCountry;
+            Birth = pe.Birth;
+            Age = pe.Age;
+            Height = pe.Height;
+            Weight = pe.Weight;
+            Position = pe.Position;
+            ShirtNumber = pe.ShirtNumber;
+            TeamName = pe.TeamName;
+            PreferredFoot = pe.PreferredFoot;
+        }
+
+        public void CompareTransferHistory(TransferHistory th)
+        {
+
+        }
+
+        public override bool Equal(BaseCacheEntity entity)
+        {
+            var pe = entity as PlayerEntity;
+
+            return FullName == pe.FullName &&
+                   Country == pe.Country &&
+                   SecondaryCountry == pe.SecondaryCountry &&
+                   Birth == pe.Birth &&
+                   Age == pe.Age &&
+                   Height == pe.Height &&
+                   Weight == pe.Weight &&
+                   Position == pe.Position &&
+                   ShirtNumber == pe.ShirtNumber &&
+                   TeamName == pe.TeamName &&
+                   PreferredFoot == pe.PreferredFoot;
+        }
     }
 
     public class TransferHistory

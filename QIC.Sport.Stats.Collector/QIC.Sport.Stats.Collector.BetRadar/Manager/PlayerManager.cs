@@ -27,10 +27,11 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Manager
 
         public override void ProcessData(BaseData data)
         {
-            var tm = IocUnity.GetService<IWorkManager>("PlayerManager");
-            //tm.AddOrUpdateParam(new BaseParam());
-            logger.Debug("PlayerManager ProcessData");
-            //base.ProcessData(data);
+            BRBaseParam param = data.Param as BRBaseParam;
+            BRData bd = data as BRData;
+
+            var handle = HandleFactory.CreateHandle(param.HandleType);
+            handle.Process(bd);
         }
     }
 }

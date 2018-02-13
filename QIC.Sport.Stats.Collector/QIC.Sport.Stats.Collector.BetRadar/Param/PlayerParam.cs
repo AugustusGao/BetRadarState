@@ -14,6 +14,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Param
             CustomUrl =
                 "gismo.php?&html=1&id=1374&language=zh&clientid=4&state=2_{0}%2C3_{1}%2C22_{2}%2C5_{3}%2C9_players%2C6_{4}%2C174_{5}&child=1";
         }
+
+        public override string GetUrl()
+        {
+            var url = string.Format(CustomUrl, SportId, OrganizerId, ContinentId, SeasonId, TeamId, PlayerId);
+            var sha1 = EncryptToSHA1(url);
+            return BaseUrl + url + "&callback=" + sha1;
+        }
+
         public override string GetKey()
         {
             return PlayerId + "_" + (RBHandleType)HandleType;

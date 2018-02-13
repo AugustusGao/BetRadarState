@@ -8,22 +8,7 @@ using QIC.Sport.Stats.Collector.Cache.CombinedData;
 
 namespace QIC.Sport.Stats.Collector.Cache.CacheDataManager
 {
-    public class PlayerPenaltiesManager : BaseCacheManager, ICacheManager
+    public class PlayerPenaltiesManager : BaseCacheManager
     {
-        public BaseCacheEntity AddOrGetCacheEntity(string key)
-        {
-            PlayerPenalties ret = new PlayerPenalties();
-            DicCacheData.AddOrUpdate(key, ret, (k, v) =>
-            {
-                ret = (PlayerPenalties)v;
-                return v;
-            });
-            return ret;
-        }
-
-        public void Remove(BaseCacheEntity entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -28,16 +28,20 @@ namespace QIC.Sport.Stats.Collector.BetRadar
             // todo IOC生成所有Manager并加入到管理集合中
 
             var organizerManager = new OrganizerManager();
-            IocUnity.RegisterInstance<IWorkManager>("LeagueManager", organizerManager);
+            IocUnity.RegisterInstance<IWorkManager>(typeof(OrganizerManager).Name, organizerManager);
             DicWorkManagers.Add(typeof(OrganizerManager).Name, (IWorkManager)organizerManager);
 
             var leagueManager = new LeagueManager();
-            IocUnity.RegisterInstance<IWorkManager>("LeagueManager", leagueManager);
+            IocUnity.RegisterInstance<IWorkManager>(typeof(LeagueManager).Name, leagueManager);
             DicWorkManagers.Add(typeof(LeagueManager).Name, (IWorkManager)leagueManager);
 
             var teamManager = new TeamManager();
-            IocUnity.RegisterInstance<IWorkManager>("TeamManager", teamManager);
+            IocUnity.RegisterInstance<IWorkManager>(typeof(TeamManager).Name, teamManager);
             DicWorkManagers.Add(typeof(TeamManager).Name, (IWorkManager)teamManager);
+
+            var playerManager = new PlayerManager();
+            IocUnity.RegisterInstance<IWorkManager>(typeof(PlayerManager).Name, playerManager);
+            DicWorkManagers.Add(typeof(PlayerManager).Name, (IWorkManager)playerManager);
 
             //  起始任务添加到OrganizerManager中
             var indexUrl = "gismo.php?&html=1&id=1828&language=zh&clientid=4&child=1&ismenu=1&childnodeid=1819";
