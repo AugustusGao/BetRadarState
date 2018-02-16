@@ -27,3 +27,13 @@ E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Colle
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.csprojResolveAssemblyReference.cache
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Cache.dll
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.dll
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Cache.pdb
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\bin\Debug\QIC.Sport.Stats.Collector.Common.pdb
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.csprojResolveAssemblyReference.cache
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.csproj.CoreCompileInputs.cache
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.dll
+E:\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.ITakerReptile\obj\Debug\QIC.Sport.Stats.Collector.ITakerReptile.pdb
