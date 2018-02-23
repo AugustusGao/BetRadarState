@@ -40,6 +40,8 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
             logger = LogManager.GetLogger(this.GetType());
             workThread = new Thread(Work);
             workThread.Start();
+            var name = this.GetType().Name;
+            Console.WriteLine(name + " Start Ok!");
         }
 
         public void Stop()

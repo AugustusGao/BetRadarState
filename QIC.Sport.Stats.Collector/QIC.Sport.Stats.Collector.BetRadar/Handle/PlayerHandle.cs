@@ -109,10 +109,12 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
 
             //  如果有添加获取转会记录的任务
-            PlayerTransferParam ptParam = param.CopyBaseParam<PlayerTransferParam>();
-            var pm = IocUnity.GetService<IWorkManager>(typeof(PlayerManager).Name);
-            pm.AddOrUpdateParam(ptParam);
-
+            if (txt.IndexOf("o=\"2\"") > 0)
+            {
+                PlayerTransferParam ptParam = param.CopyBaseParam<PlayerTransferParam>();
+                var pm = IocUnity.GetService<IWorkManager>(typeof(PlayerManager).Name);
+                pm.AddOrUpdateParam(ptParam);
+            }
         }
     }
 }

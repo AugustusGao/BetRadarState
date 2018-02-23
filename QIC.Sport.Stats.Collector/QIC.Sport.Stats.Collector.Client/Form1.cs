@@ -55,13 +55,13 @@ namespace QIC.Sport.Stats.Collector.Client
         private void btnStart_Click(object sender, EventArgs e)
         {
             Console.SetOut(tw);
+            Console.WriteLine("Beginning ...");
             var type = ConfigSingleton.CreateInstance().GetAppConfig<string>("ReptileType");
 
             reptile = IocUnity.GetService<IReptile>(type);
 
             reptile.Start();
 
-            Console.WriteLine("Start OK!");
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
