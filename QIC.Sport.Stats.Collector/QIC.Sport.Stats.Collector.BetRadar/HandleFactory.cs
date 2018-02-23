@@ -30,6 +30,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar
                 case RBHandleType.Player:
                     handle = new PlayerHandle();
                     break;
+                case RBHandleType.Injury:
+                    handle = new InjuryHandle();
+                    break;
                 case RBHandleType.PlayerTransfer:
                     handle = new PlayerTransferHandle();
                     break;

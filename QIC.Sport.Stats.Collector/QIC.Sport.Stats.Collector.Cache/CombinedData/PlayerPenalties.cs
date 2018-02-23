@@ -14,5 +14,15 @@ namespace QIC.Sport.Stats.Collector.Cache.CombinedData
         public string SeasonId;
         public string PlayerId;
         public string Penalties;
+        public override string GetKey()
+        {
+            return PlayerId + "_" + SeasonId;
+        }
+
+        public void ComparePlayerPenalties(string penalties)
+        {
+            if (Penalties == penalties) return;
+            Penalties = penalties;
+        }
     }
 }

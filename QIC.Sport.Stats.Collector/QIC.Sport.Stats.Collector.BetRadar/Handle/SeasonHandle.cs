@@ -24,6 +24,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             BRData bd = data as BRData;
             SeasonParam param = bd.Param as SeasonParam;
 
+            if (string.IsNullOrEmpty(bd.Html)) return;
             var txt = HttpUtility.HtmlDecode(bd.Html);
 
             var xml = new XmlHelper(txt);

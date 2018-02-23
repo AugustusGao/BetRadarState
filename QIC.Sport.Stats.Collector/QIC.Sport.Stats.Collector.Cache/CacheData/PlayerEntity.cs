@@ -20,7 +20,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string ShirtNumber;
         public string TeamName;
         public string PreferredFoot;
-        public List<TransferHistory> TransferHistorys;
+        public List<TransferHistory> TransferHistorys = new List<TransferHistory>();
 
         public void CompareInfo(PlayerEntity pe)
         {
@@ -41,7 +41,13 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
 
         public void CompareTransferHistory(TransferHistory th)
         {
-
+            var oldTh = TransferHistorys.FirstOrDefault(o => o.DuringTime == th.DuringTime); //  时间是唯一的
+            if (oldTh == null) TransferHistorys.Add(th);
+            else if (th.TeamId != oldTh.TeamId || th.Description != oldTh.Description)
+            {
+                oldTh.TeamId = th.TeamId;
+                oldTh.Description = th.Description;
+            }
         }
 
         public override bool Equal(BaseCacheEntity entity)
@@ -64,7 +70,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
 
     public class TransferHistory
     {
-        public int TeamId;
+        public string TeamId;
         public string DuringTime;
         public string Description;
 

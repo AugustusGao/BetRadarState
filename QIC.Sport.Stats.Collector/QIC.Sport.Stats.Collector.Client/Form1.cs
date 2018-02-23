@@ -23,54 +23,13 @@ namespace QIC.Sport.Stats.Collector.Client
     public partial class Form1 : Form
     {
         private TextBoxWriter tw;
+        private IReptile reptile;
         public Form1()
         {
             InitializeComponent();
             tw = new TextBoxWriter(this.textBox1);
-            #region Test
 
-            HandleProcessTest();
-
-            //var path = @"C:\Users\Gaushee\Desktop\temp.txt";
-            //var data = File.ReadAllText(path);
-            //var h = new XmlHelper(data);
-            //var xp4 = "//c";
-
-            //var n = h.GetValue(xp4);
-
-            //HtmlAgilityPack.HtmlDocument d = new HtmlAgilityPack.HtmlDocument();
-            //d.LoadHtml(n);
-            //var root = d.DocumentNode;
-
-            //var ns1 = root.SelectSingleNode("//ul[@class=' jdlvl_2']");
-
-            //var nn = ns1.SelectSingleNode("//ul[contains(@class,'jdlvl_3')]");
-
-
-            //foreach (var state in ns1.ChildNodes)
-            //{
-            //    var s3 = state.SelectNodes("ul/li[@class='floater ']");
-
-            //    var ss3 = state.SelectNodes("ul/li[contains(@class,'cc-')]");
-
-
-            //    foreach (var s3e in s3)
-            //    {
-            //        var ss4 = s3e.SelectSingleNode("ul[@class=' jdlvl_4']");
-
-
-            //        var s4 = s3e.SelectNodes("ul/li");
-            //        if (s4 == null) continue;
-
-            //        foreach (var s4e in s4)
-            //        {
-            //            var ss5 = s4e.SelectSingleNode("ul[@class=' jdlvl_5']");
-            //            var s5 = s4e.SelectNodes("ul/li");
-            //        }
-            //    }
-            //}
-
-            #endregion
+            //HandleProcessTest();
 
         }
 
@@ -87,7 +46,7 @@ namespace QIC.Sport.Stats.Collector.Client
             var txt = File.ReadAllText(path);
             var data = new BRData
             {
-                Param = new TeamParam(){TeamId = "223423",PlayerId = "12334"},
+                Param = new TeamParam() { TeamId = "223423", PlayerId = "12334" },
                 Html = txt
             };
             ph.Process(data);
@@ -98,11 +57,16 @@ namespace QIC.Sport.Stats.Collector.Client
             Console.SetOut(tw);
             var type = ConfigSingleton.CreateInstance().GetAppConfig<string>("ReptileType");
 
-            IReptile r = IocUnity.GetService<IReptile>(type);
+            reptile = IocUnity.GetService<IReptile>(type);
 
-            r.Start();
+            reptile.Start();
 
             Console.WriteLine("Start OK!");
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            reptile.Stop();
         }
     }
 

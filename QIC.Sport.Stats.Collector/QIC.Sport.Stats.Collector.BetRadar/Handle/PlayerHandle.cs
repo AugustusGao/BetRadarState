@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using ML.Infrastructure.IOC;
+using QIC.Sport.Stats.Collector.BetRadar.Manager;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
 using QIC.Sport.Stats.Collector.Cache.CacheData;
 using QIC.Sport.Stats.Collector.Cache.CacheDataManager;
 using QIC.Sport.Stats.Collector.Common;
+using QIC.Sport.Stats.Collector.ITakerReptile;
 using ICacheManager = QIC.Sport.Stats.Collector.Cache.ICacheManager;
 
 namespace QIC.Sport.Stats.Collector.BetRadar.Handle
@@ -21,6 +23,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             BRData bd = data as BRData;
             PlayerParam param = bd.Param as PlayerParam;
 
+            if (string.IsNullOrEmpty(bd.Html)) return;
             var txt = HttpUtility.HtmlDecode(bd.Html);
 
             var xml = new XmlHelper(txt);
@@ -78,13 +81,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 foreach (var node in tb.ChildNodes)
                 {
                     var scoreStr = node.SelectSingleNode("td[@class='score']");
-                    if (string.IsNullOrEmpty(scoreStr.InnerHtml)) continue;
+                    if (scoreStr == null || string.IsNullOrEmpty(scoreStr.InnerHtml)) continue;
                     var matchId = RegGetStr(scoreStr.InnerHtml, "matchid','", "\'");
                     var nowPsr = new PlayerStatisticsRecord();
                     nowPsr.MatchId = matchId;
                     nowPsr.PlayerId = param.PlayerId;
                     nowPsr.Goals = Convert.ToInt32(node.SelectSingleNode("td[@class='goals']").InnerText);
-                    nowPsr.Assists = Convert.ToInt32(node.SelectSingleNode("td[@class='assists']").InnerText);
+                    var assists = node.SelectSingleNode("td[@class='assists']");
+                    nowPsr.Assists = assists == null ? 0 : Convert.ToInt32(assists.InnerText);
                     nowPsr.YellowCard = Convert.ToInt32(node.SelectSingleNode("td[@class='yellow']").InnerText);
                     nowPsr.YellowRedCard = Convert.ToInt32(node.SelectSingleNode("td[@class='yellowred']").InnerText);
                     nowPsr.RedCard = Convert.ToInt32(node.SelectSingleNode("td[@class='red last']").InnerText);
@@ -105,7 +109,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
 
             //  如果有添加获取转会记录的任务
-
+            PlayerTransferParam ptParam = param.CopyBaseParam<PlayerTransferParam>();
+            var pm = IocUnity.GetService<IWorkManager>(typeof(PlayerManager).Name);
+            pm.AddOrUpdateParam(ptParam);
 
         }
     }

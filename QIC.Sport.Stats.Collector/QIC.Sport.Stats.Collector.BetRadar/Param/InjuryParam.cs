@@ -17,5 +17,12 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Param
         {
             return SeasonId + "_" + TeamId + "_" + (RBHandleType)HandleType;
         }
+
+        public override string GetUrl()
+        {
+            var url = string.Format(CustomUrl, SportId, OrganizerId, ContinentId, SeasonId, TeamId);
+            var sha1 = EncryptToSHA1(url);
+            return BaseUrl + url + "&callback=" + sha1;
+        }
     }
 }

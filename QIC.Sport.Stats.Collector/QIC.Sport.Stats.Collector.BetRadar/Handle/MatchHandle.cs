@@ -16,14 +16,11 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 {
     public class MatchHandle : BaseHandle, IHandle
     {
-        //  获得比赛信息
-
-        //  获得比赛结果
         public void Process(ITakerReptile.Dto.BaseData data)
         {
             BRData bd = data as BRData;
             MatchParam param = bd.Param as MatchParam;
-
+            if (string.IsNullOrEmpty(bd.Html)) return;
             var txt = HttpUtility.HtmlDecode(bd.Html);
 
             var xml = new XmlHelper(txt);

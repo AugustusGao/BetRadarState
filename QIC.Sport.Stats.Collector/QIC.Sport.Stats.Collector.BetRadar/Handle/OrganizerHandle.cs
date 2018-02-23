@@ -22,7 +22,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         public void Process(BaseData data)
         {
             BRData bd = data as BRData;
-
+            if (string.IsNullOrEmpty(bd.Html)) return;
             var txt = HttpUtility.HtmlDecode(bd.Html);
 
             var xml = new XmlHelper(txt);

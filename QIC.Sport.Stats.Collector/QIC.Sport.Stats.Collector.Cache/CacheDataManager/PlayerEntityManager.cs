@@ -9,5 +9,6 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheDataManager
 {
     public class PlayerEntityManager : BaseCacheManager
     {
+
     }
 }

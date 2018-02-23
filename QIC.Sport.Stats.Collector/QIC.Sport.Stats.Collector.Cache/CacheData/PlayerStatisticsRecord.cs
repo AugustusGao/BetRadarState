@@ -12,7 +12,6 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string PlayerId;
         public int Goals;
         public int Assists;
-        public int Penalties;
         public int YellowCard;
         public int YellowRedCard;
         public int RedCard;
@@ -24,7 +23,6 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
             PlayerId = record.PlayerId;
             Goals = record.Goals;
             Assists = record.Assists;
-            Penalties = record.Penalties;
             YellowCard = record.YellowCard;
             YellowRedCard = record.YellowRedCard;
             RedCard = record.RedCard;
