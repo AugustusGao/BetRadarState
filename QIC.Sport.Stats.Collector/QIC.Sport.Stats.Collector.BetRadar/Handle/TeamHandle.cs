@@ -58,16 +58,19 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var penGoals = cdata[14];
             root = GetHtmlRoot(penGoals);
             var trsPenGoals = root.SelectNodes("//tbody/tr");
-            foreach (var tr in trsPenGoals)
+            if (trsPenGoals != null)
             {
-                var player = tr.SelectSingleNode("td[@class='player']");
-                if (player == null) continue;
-                var playerId = RegGetStr(player.InnerHtml, "playerid', '", "',");
-                var pen = tr.LastChild.InnerText;
-                PlayerPenalties pp = PlayerPenaltiesManager.AddOrGetCacheEntity<PlayerPenalties>(playerId + "_" + param.SeasonId);
-                pp.PlayerId = playerId;
-                pp.SeasonId = param.SeasonId;
-                pp.ComparePlayerPenalties(pen);
+                foreach (var tr in trsPenGoals)
+                {
+                    var player = tr.SelectSingleNode("td[@class='player']");
+                    if (player == null) continue;
+                    var playerId = RegexGetStr(player.InnerHtml, "playerid', '", "',");
+                    var pen = tr.LastChild.InnerText;
+                    PlayerPenalties pp = PlayerPenaltiesManager.AddOrGetCacheEntity<PlayerPenalties>(playerId + "_" + param.SeasonId);
+                    pp.PlayerId = playerId;
+                    pp.SeasonId = param.SeasonId;
+                    pp.ComparePlayerPenalties(pen);
+                }
             }
 
             //  解析全部名单，并添加球员任务
@@ -78,7 +81,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             foreach (var tr in trsPlayer)
             {
                 var s = tr.Attributes["onclick"].Value;
-                var playerId = RegGetStr(s, "playerid', '", "',");
+                var playerId = RegexGetStr(s, "playerid', '", "',");
                 list.Add(playerId);
             }
             var tp = TeamPlayersManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);

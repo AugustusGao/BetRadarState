@@ -45,7 +45,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     continue;
                 }
                 //  大洲的信息
-                var continentId = RegGetStr(cs.Attributes["href"].Value, "22_", "',");
+                var continentId = RegexGetStr(cs.Attributes["href"].Value, "22_", "',");
                 var continentName = cs.InnerText;
 
                 var jd3 = c2.SelectSingleNode("ul[contains(@class,'jdlvl_3')]");
@@ -88,7 +88,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         var a2 = n2.ChildNodes[0].Attributes["href"];
                         if (a2 != null)
                         {
-                            var seasonId = RegGetStr(a2.Value, "seasonid','", "',");
+                            var seasonId = RegexGetStr(a2.Value, "seasonid','", "',");
                             LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n2.InnerText);
                             le.LeagueName = n2.InnerText;
                             le.AddSeasonId(seasonId, true);
@@ -102,7 +102,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         var a3 = n3.ChildNodes[0].Attributes["href"];
                         if (a3 != null)
                         {
-                            var seasonId = RegGetStr(a3.Value, "seasonid','", "',");
+                            var seasonId = RegexGetStr(a3.Value, "seasonid','", "',");
                             LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n3.InnerText);
                             le.LeagueName = n3.InnerText;
                             le.AddSeasonId(seasonId, true);
@@ -146,7 +146,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         continue;
                     }
                     var a = node.ChildNodes[0];
-                    var organizerId = RegGetStr(a.Attributes["href"].Value, "3_", ",");
+                    var organizerId = RegexGetStr(a.Attributes["href"].Value, "3_", ",");
                     var organizerName = a.InnerText;
                     OrganizerEntity ent = OrganizerEntityManager.AddOrGetCacheEntity<OrganizerEntity>(organizerId);
                     ent.ContinentId = continentId;
@@ -160,7 +160,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     foreach (var ul in uls)
                     {
                         var s = ul.ChildNodes[0].Attributes["href"].Value;
-                        var seasonId = RegGetStr(s, "seasonid','", "',");
+                        var seasonId = RegexGetStr(s, "seasonid','", "',");
                         LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(ul.InnerText);
                         le.LeagueName = ul.InnerText;
                         le.AddSeasonId(seasonId, true);
@@ -190,7 +190,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         };
 
                         //  todo 测试只加入西班牙的联赛任务
-                        if (sid == "42556")
+                        //if (sid == "42556")
                             LeagueManager.AddOrUpdateParam(sp);
                     }
                 }

@@ -37,7 +37,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 if (player == null) continue;
 
                 InjurePlayer injure = new InjurePlayer();
-                injure.PlayerId = RegGetStr(player.InnerHtml, "playerid', '", "',");
+                injure.PlayerId = RegexGetStr(player.InnerHtml, "playerid', '", "',");
                 injure.Missing = node.SelectSingleNode("td[@class='missing']").InnerText;
                 injure.Status = node.SelectSingleNode("td[@class='reason ']").InnerText;
                 list.Add(injure);

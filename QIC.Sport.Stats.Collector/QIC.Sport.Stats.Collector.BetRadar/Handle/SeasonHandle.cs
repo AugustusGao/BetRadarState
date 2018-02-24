@@ -46,7 +46,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 html = cdata[4];
             }
 
-            var currentRound = RegGetStr(cdata[0], "sb-current\"><div class=\"label\">", "<");
+            var currentRound = RegexGetStr(cdata[0], "sb-current\"><div class=\"label\">", "<");
             se.CurrentRound = currentRound;
 
             //  解析积分数据，并添加队伍任务,添加队伍积分数据，其他数据可由已经结束的比赛结果计算
@@ -56,7 +56,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var table = root.SelectSingleNode("//table[@class='normaltable']/tbody");
             foreach (var node in table.ChildNodes)
             {
-                var teamId = RegGetStr(node.ChildNodes[2].InnerHtml, "teamid','", "',");
+                var teamId = RegexGetStr(node.ChildNodes[2].InnerHtml, "teamid','", "',");
                 teamIdList.Add(teamId);
                 var trDataArr = node.ChildNodes.Select(o => o.InnerText).ToArray();
 

@@ -37,7 +37,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             foreach (var node in tbody.ChildNodes)
             {
                 TransferHistory th = new TransferHistory();
-                th.TeamId = RegGetStr(node.ChildNodes[0].InnerHtml, "teamid','", "',");
+                th.TeamId = RegexGetStr(node.ChildNodes[0].InnerHtml, "teamid','", "',");
                 th.DuringTime = node.ChildNodes[1].InnerText;
                 th.Description = node.ChildNodes[2].InnerText;
                 player.CompareTransferHistory(th);

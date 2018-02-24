@@ -34,8 +34,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         protected static readonly ICacheManager SeasonTeamsManager = IocUnity.GetService<ICacheManager>(typeof(SeasonTeamsManager).Name);
         protected static readonly ICacheManager TeamEntityManager = IocUnity.GetService<ICacheManager>(typeof(TeamEntityManager).Name);
         protected static readonly ICacheManager TeamPlayersManager = IocUnity.GetService<ICacheManager>(typeof(TeamPlayersManager).Name);
-
-        public static string RegGetStr(string originStr, string startStr, string endStr)
+        /// <summary>
+        /// 正则获取指定字串之间的字符串
+        /// </summary>
+        /// <param name="originStr">完整的字符串</param>
+        /// <param name="startStr">开始字串</param>
+        /// <param name="endStr">结束字串</param>
+        /// <returns>两个字串之间的字符串</returns>
+        public static string RegexGetStr(string originStr, string startStr, string endStr)
         {
             Regex rg = new Regex("(?<=(" + startStr + "))[.\\s\\S]*?(?=(" + endStr + "))", RegexOptions.Multiline | RegexOptions.Singleline);
             return rg.Match(originStr).Value;

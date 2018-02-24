@@ -77,7 +77,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 {
                     var scoreStr = node.SelectSingleNode("td[@class='score']");
                     if (scoreStr == null || string.IsNullOrEmpty(scoreStr.InnerHtml)) continue;
-                    var matchId = RegGetStr(scoreStr.InnerHtml, "matchid','", "\'");
+                    var matchId = RegexGetStr(scoreStr.InnerHtml, "matchid','", "\'");
                     var nowPsr = new PlayerStatisticsRecord();
                     nowPsr.MatchId = matchId;
                     nowPsr.PlayerId = param.PlayerId;
