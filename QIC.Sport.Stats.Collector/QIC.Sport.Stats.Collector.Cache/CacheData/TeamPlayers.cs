@@ -13,11 +13,11 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
     {
         public string SeasonId;
         public string TeamId;
-        public List<string> BestPlayerList = new List<string>();      //  list名次PlayerId
-        public List<string> CardPlayerList = new List<string>();      //  list名次PlayerId
-        public List<string> AssistsPlayerList = new List<string>();   //  list名次PlayerId
-        public List<string> AllPlayerIdList = new List<string>();    //  球队名单
+        public List<string> BestPlayerList = new List<string>();      //  最佳名单list名次PlayerId
+        public List<string> CardPlayerList = new List<string>();      //  牌list名次PlayerId
+        public List<string> AssistsPlayerList = new List<string>();   //  助攻list名次PlayerId
         public Dictionary<string, InjurePlayer> InjurePlayerDic = new Dictionary<string, InjurePlayer>();    //  kv = PlayerId--伤停状态描述
+        public List<string> AllPlayerIdList = new List<string>();     //  球队名单
         public Dictionary<string, List<string>> ComparePlayerIdList(List<string> list)
         {
             var adds = list.Except(AllPlayerIdList).ToList();

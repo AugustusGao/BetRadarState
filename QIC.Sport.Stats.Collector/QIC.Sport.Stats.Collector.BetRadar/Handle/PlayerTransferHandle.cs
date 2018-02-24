@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Manager;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
@@ -34,8 +33,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
             var root = GetHtmlRoot(cdata);
             var tbody = root.SelectSingleNode("//tbody");
-            var pem = IocUnity.GetService<ICacheManager>(typeof(PlayerEntityManager).Name);
-            var player = pem.AddOrGetCacheEntity<PlayerEntity>(param.PlayerId);
+            var player = PlayerEntityManager.AddOrGetCacheEntity<PlayerEntity>(param.PlayerId);
             foreach (var node in tbody.ChildNodes)
             {
                 TransferHistory th = new TransferHistory();

@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml;
 using HtmlAgilityPack;
-using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
 using QIC.Sport.Stats.Collector.Cache.CacheData;
 using QIC.Sport.Stats.Collector.Common;
 using QIC.Sport.Stats.Collector.ITakerReptile;
 using QIC.Sport.Stats.Collector.ITakerReptile.Dto;
-using ICacheManager = QIC.Sport.Stats.Collector.Cache.ICacheManager;
 
 namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 {
@@ -34,9 +32,6 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var root = d.DocumentNode;
 
             var jd2 = root.SelectSingleNode("//li[@class='topelem sport-1']/ul[@class=' jdlvl_2']");
-
-            var cacheOrganizer = IocUnity.GetService<ICacheManager>("OrganizerEntityManager");
-            var cacheLeague = IocUnity.GetService<ICacheManager>("LeagueEntityManager");
 
             List<HtmlNode> needNodes = new List<HtmlNode>();
             foreach (var c2 in jd2.ChildNodes)
@@ -73,14 +68,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (i == 2) //  标题行的处理
                         {
                             var key = "393";
-                            oe = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(key);
+                            oe = OrganizerEntityManager.AddOrGetCacheEntity<OrganizerEntity>(key);
                             oe.OrganizerId = key;
                             oe.OrganizerName = n3.ChildNodes[0].InnerText;
                             oe.ContinentId = continentId;
                             oe.ContinentName = continentName;
 
                             key = "4";
-                            oe = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(key);
+                            oe = OrganizerEntityManager.AddOrGetCacheEntity<OrganizerEntity>(key);
                             oe.OrganizerId = key;
                             oe.OrganizerName = n2.ChildNodes[0].InnerText;
                             oe.ContinentId = continentId;
@@ -94,7 +89,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a2 != null)
                         {
                             var seasonId = RegGetStr(a2.Value, "seasonid','", "',");
-                            LeagueEntity le = cacheLeague.AddOrGetCacheEntity<LeagueEntity>(n2.InnerText);
+                            LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n2.InnerText);
                             le.LeagueName = n2.InnerText;
                             le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
@@ -108,7 +103,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a3 != null)
                         {
                             var seasonId = RegGetStr(a3.Value, "seasonid','", "',");
-                            LeagueEntity le = cacheLeague.AddOrGetCacheEntity<LeagueEntity>(n3.InnerText);
+                            LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n3.InnerText);
                             le.LeagueName = n3.InnerText;
                             le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
@@ -121,7 +116,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
                 foreach (var kv in dic)
                 {
-                    var oe = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(kv.Key);
+                    var oe = OrganizerEntityManager.AddOrGetCacheEntity<OrganizerEntity>(kv.Key);
                     var cpDic = oe.CompareSeasonIds(kv.Value);
                     NextAssignTask(oe, cpDic);
                 }
@@ -153,7 +148,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     var a = node.ChildNodes[0];
                     var organizerId = RegGetStr(a.Attributes["href"].Value, "3_", ",");
                     var organizerName = a.InnerText;
-                    OrganizerEntity ent = cacheOrganizer.AddOrGetCacheEntity<OrganizerEntity>(organizerId);
+                    OrganizerEntity ent = OrganizerEntityManager.AddOrGetCacheEntity<OrganizerEntity>(organizerId);
                     ent.ContinentId = continentId;
                     ent.ContinentName = continentName;
                     ent.OrganizerId = organizerId;
@@ -166,7 +161,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         var s = ul.ChildNodes[0].Attributes["href"].Value;
                         var seasonId = RegGetStr(s, "seasonid','", "',");
-                        LeagueEntity le = cacheLeague.AddOrGetCacheEntity<LeagueEntity>(ul.InnerText);
+                        LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(ul.InnerText);
                         le.LeagueName = ul.InnerText;
                         le.AddSeasonId(seasonId, true);
                         list.Add(seasonId);
@@ -180,7 +175,6 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
         private void NextAssignTask(OrganizerEntity entity, Dictionary<string, List<string>> taskDic)
         {
-            var leagueManager = IocUnity.GetService<IWorkManager>("LeagueManager");
             foreach (var kv in taskDic)
             {
                 if (kv.Key == "add")
@@ -197,7 +191,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
                         //  todo 测试只加入西班牙的联赛任务
                         if (sid == "42556")
-                        leagueManager.AddOrUpdateParam(sp);
+                            LeagueManager.AddOrUpdateParam(sp);
                     }
                 }
                 else if (kv.Key == "del")
@@ -211,7 +205,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                             ContinentId = entity.ContinentId,
                             OrganizerId = entity.OrganizerId
                         };
-                        leagueManager.RemoveParam(sp);
+                        LeagueManager.RemoveParam(sp);
                     }
                 }
             }

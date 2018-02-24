@@ -13,6 +13,6 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
     public class SeasonPalyers
     {
         public string SeasonId;
-        public Dictionary<string, string> TopScorePlayerDic = new Dictionary<string, string>();     //  kv = 名次--球员Id
+        public List<string> TopScorePlayerList = new List<string>();     //  list名次球员Id
     }
 }

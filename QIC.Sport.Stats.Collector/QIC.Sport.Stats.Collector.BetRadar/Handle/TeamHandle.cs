@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Manager;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
@@ -49,8 +48,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             {
                 te.Manager = trsTeam[1].LastChild.InnerText;
                 te.Venue = trsTeam[2].LastChild.InnerText;
-                var teCache = IocUnity.GetService<ICacheManager>(typeof(TeamEntityManager).Name);
-                var teamEntity = teCache.AddOrGetCacheEntity<TeamEntity>(te.TeamId);
+                var teamEntity = TeamEntityManager.AddOrGetCacheEntity<TeamEntity>(te.TeamId);
                 teamEntity.CompareTeamEntity(te);
             }
 
@@ -60,14 +58,13 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var penGoals = cdata[14];
             root = GetHtmlRoot(penGoals);
             var trsPenGoals = root.SelectNodes("//tbody/tr");
-            var pm = IocUnity.GetService<ICacheManager>(typeof(PlayerPenaltiesManager).Name);
             foreach (var tr in trsPenGoals)
             {
                 var player = tr.SelectSingleNode("td[@class='player']");
                 if (player == null) continue;
                 var playerId = RegGetStr(player.InnerHtml, "playerid', '", "',");
                 var pen = tr.LastChild.InnerText;
-                PlayerPenalties pp = pm.AddOrGetCacheEntity<PlayerPenalties>(playerId + "_" + param.SeasonId);
+                PlayerPenalties pp = PlayerPenaltiesManager.AddOrGetCacheEntity<PlayerPenalties>(playerId + "_" + param.SeasonId);
                 pp.PlayerId = playerId;
                 pp.SeasonId = param.SeasonId;
                 pp.ComparePlayerPenalties(pen);
@@ -84,8 +81,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 var playerId = RegGetStr(s, "playerid', '", "',");
                 list.Add(playerId);
             }
-            TeamPlayersManager tpmManager = (TeamPlayersManager)IocUnity.GetService<ICacheManager>(typeof(TeamPlayersManager).Name);
-            var tp = tpmManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
+            var tp = TeamPlayersManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
             var dic = tp.ComparePlayerIdList(list);
             #endregion
             NextAssignTask(param, dic);
@@ -94,15 +90,13 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             if (txt.IndexOf("o=\"1003\"") > 0)
             {
                 InjuryParam ip = param.CopyBaseParam<InjuryParam>();
-                var lm = IocUnity.GetService<IWorkManager>(typeof(LeagueManager).Name);
-                lm.AddOrUpdateParam(ip);
+                LeagueManager.AddOrUpdateParam(ip);
             }
         }
 
         //  分配任务
         private void NextAssignTask(TeamParam param, Dictionary<string, List<string>> taskDic)
         {
-            IWorkManager tm = IocUnity.GetService<IWorkManager>(typeof(PlayerManager).Name);
             foreach (var kv in taskDic)
             {
                 if (kv.Key == "add")
@@ -111,7 +105,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         PlayerParam pp = param.CopyBaseParam<PlayerParam>();
                         pp.PlayerId = o;
-                        tm.AddOrUpdateParam(pp);
+                        PlayerManager.AddOrUpdateParam(pp);
                     });
                 }
                 else
@@ -120,7 +114,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         PlayerParam pp = param.CopyBaseParam<PlayerParam>();
                         pp.PlayerId = o;
-                        tm.RemoveParam(pp);
+                        PlayerManager.RemoveParam(pp);
                     });
                 }
             }

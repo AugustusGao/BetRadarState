@@ -61,5 +61,3 @@ E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Colle
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Client\obj\Debug\QIC.Sport.Stats.Collector.Client.csproj.GenerateResource.Cache
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Client\obj\Debug\QIC.Sport.Stats.Collector.Client.exe
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Client\obj\Debug\QIC.Sport.Stats.Collector.Client.pdb
-F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Client\bin\Debug\EntityFramework.dll
-F:\Repository\GitHub\BetRadarState\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.Client\bin\Debug\ML.EGP.Enums.dll

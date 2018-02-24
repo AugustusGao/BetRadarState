@@ -7,7 +7,7 @@ using QIC.Sport.Stats.Collector.Cache.CacheData;
 
 namespace QIC.Sport.Stats.Collector.Cache.CacheDataManager
 {
-    public class SeasonEntityManager : BaseCacheManager, ICacheManager
+    public class SeasonEntityManager : BaseCacheManager
     {
     }
 }

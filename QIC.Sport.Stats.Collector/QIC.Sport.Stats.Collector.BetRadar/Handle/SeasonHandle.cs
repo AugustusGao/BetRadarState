@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using ML.Infrastructure.Caching;
-using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Manager;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache.CacheData;
@@ -33,8 +32,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var title = xml.GetAttributeValue("//page", "title");
             var seasonName = title.Split('>').Last();
 
-            SeasonEntityManager sem = (SeasonEntityManager)IocUnity.GetService<ICacheManager>(typeof(SeasonEntityManager).Name);
-            SeasonEntity se = sem.AddOrGetCacheEntity<SeasonEntity>(param.SeasonId);
+            SeasonEntity se = SeasonEntityManager.AddOrGetCacheEntity<SeasonEntity>(param.SeasonId);
+            se.SportId = param.SportId;
+            se.SeasonId = param.SeasonId;
             se.SeasonName = seasonName;
 
             //  获取积分数据块
@@ -46,8 +46,12 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 html = cdata[4];
             }
 
+            var currentRound = RegGetStr(cdata[0], "sb-current\"><div class=\"label\">", "<");
+            se.CurrentRound = currentRound;
+
             //  解析积分数据，并添加队伍任务,添加队伍积分数据，其他数据可由已经结束的比赛结果计算
             List<string> teamIdList = new List<string>();
+            List<TeamRank> trList = new List<TeamRank>();
             var root = GetHtmlRoot(html);
             var table = root.SelectSingleNode("//table[@class='normaltable']/tbody");
             foreach (var node in table.ChildNodes)
@@ -63,8 +67,11 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     TeamPoints = trDataArr[11],
                     Description = trDataArr[12]
                 };
-                se.AddOrUpdateTeamRank(tr);
+                trList.Add(tr);
             }
+            SeasonTeams st = SeasonTeamsManager.AddOrGetCacheEntity<SeasonTeams>(param.SeasonId);
+            st.CompareTeamRank(trList);
+
 
             //  要分配的队伍任务
             var teamTaskDic = se.CompareTeamIdList(teamIdList);
@@ -72,14 +79,12 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
             //  添加联赛层级的比赛任务
             MatchParam mp = param.CopyBaseParam<MatchParam>();
-            IWorkManager sm = IocUnity.GetService<IWorkManager>(typeof(LeagueManager).Name);
-            sm.AddOrUpdateParam(mp);
+            LeagueManager.AddOrUpdateParam(mp);
         }
 
         //  分配任务
         private void NextAssignTask(SeasonParam param, Dictionary<string, List<string>> taskDic)
         {
-            IWorkManager tm = IocUnity.GetService<IWorkManager>(typeof(TeamManager).Name);
             foreach (var kv in taskDic)
             {
                 if (kv.Key == "add")
@@ -88,7 +93,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         TeamParam tp = param.CopyBaseParam<TeamParam>();
                         tp.TeamId = o;
-                        tm.AddOrUpdateParam(tp);
+                        TeamManager.AddOrUpdateParam(tp);
                     });
                 }
                 else
@@ -97,7 +102,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         TeamParam tp = param.CopyBaseParam<TeamParam>();
                         tp.TeamId = o;
-                        tm.RemoveParam(tp);
+                        TeamManager.RemoveParam(tp);
                     });
                 }
             }

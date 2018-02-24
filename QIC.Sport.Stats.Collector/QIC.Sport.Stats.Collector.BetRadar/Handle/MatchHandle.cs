@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
 using QIC.Sport.Stats.Collector.Cache.CacheData;
@@ -49,8 +48,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     var ftResult = tr.SelectSingleNode("td[@class='nt ftx ']").InnerText;
 
                     var matchId = RegGetStr(matchIdStr, "matchid', ", ",");
-                    var meCache = IocUnity.GetService<ICacheManager>(typeof(MatchEntityManager).Name);
-                    var me = meCache.AddOrGetCacheEntity<MatchEntity>(matchId);
+                    var me = MatchEntityManager.AddOrGetCacheEntity<MatchEntity>(matchId);
                     me.MatchId = matchId;
                     me.HomeId = RegGetStr(homeIdStr, "small/", ".png");
                     me.AwayId = RegGetStr(awayIdStr, "small/", ".png");

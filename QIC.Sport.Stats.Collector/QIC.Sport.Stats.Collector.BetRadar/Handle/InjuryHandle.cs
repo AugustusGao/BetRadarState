@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
 using QIC.Sport.Stats.Collector.Cache.CacheData;
-using QIC.Sport.Stats.Collector.Cache.CacheDataManager;
 using QIC.Sport.Stats.Collector.Common;
 
 namespace QIC.Sport.Stats.Collector.BetRadar.Handle
@@ -44,8 +42,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 injure.Status = node.SelectSingleNode("td[@class='reason ']").InnerText;
                 list.Add(injure);
             }
-            var m = IocUnity.GetService<ICacheManager>(typeof(TeamPlayersManager).Name);
-            var tp = m.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
+            var tp = TeamPlayersManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
             tp.CompareInjurePlayerList(list);
         }
     }

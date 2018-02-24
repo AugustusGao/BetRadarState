@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Manager;
 using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache;
@@ -56,8 +55,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     PreferredFoot = tds[tdCount - 1].InnerText,
                 };
 
-                var peManager = IocUnity.GetService<ICacheManager>(typeof(PlayerEntityManager).Name);
-                var pe = peManager.AddOrGetCacheEntity<PlayerEntity>(param.PlayerId);
+                var pe = PlayerEntityManager.AddOrGetCacheEntity<PlayerEntity>(param.PlayerId);
                 pe.CompareInfo(currentPlayerEntity);
             }
             else
@@ -72,9 +70,6 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var recordData = cdata[2];
             root = GetHtmlRoot(recordData);
             var tbodys = root.SelectNodes("//tbody");
-
-            var psRecordCache = IocUnity.GetService<ICacheManager>(typeof(PlayerStatisticsRecordManager).Name);
-            var ptRecordCache = IocUnity.GetService<ICacheManager>(typeof(PlayerTimeRecordManager).Name);
 
             foreach (var tb in tbodys)
             {
@@ -92,7 +87,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     nowPsr.YellowCard = Convert.ToInt32(node.SelectSingleNode("td[@class='yellow']").InnerText);
                     nowPsr.YellowRedCard = Convert.ToInt32(node.SelectSingleNode("td[@class='yellowred']").InnerText);
                     nowPsr.RedCard = Convert.ToInt32(node.SelectSingleNode("td[@class='red last']").InnerText);
-                    var psr = psRecordCache.AddOrGetCacheEntity<PlayerStatisticsRecord>(param.PlayerId + "_" + matchId);
+                    var psr = PlayerStatisticsRecordManager.AddOrGetCacheEntity<PlayerStatisticsRecord>(param.PlayerId + "_" + matchId);
                     psr.Compare(nowPsr);
 
                     var nowPtr = new PlayerTimeRecord();
@@ -102,7 +97,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     nowPtr.IsInPlay = Convert.ToInt32(node.SelectSingleNode("td[@class='in']").InnerText) == 1;
                     nowPtr.IsOutPlay = Convert.ToInt32(node.SelectSingleNode("td[@class='out']").InnerText) == 1;
                     nowPtr.MinutesPlayed = Convert.ToInt32(node.SelectSingleNode("td[@class='min']").InnerText);
-                    var ptr = ptRecordCache.AddOrGetCacheEntity<PlayerTimeRecord>(param.PlayerId + "_" + matchId);
+                    var ptr = PlayerTimeRecordManager.AddOrGetCacheEntity<PlayerTimeRecord>(param.PlayerId + "_" + matchId);
                     ptr.Compare(nowPtr);
                 }
             }
@@ -112,8 +107,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             if (txt.IndexOf("o=\"2\"") > 0)
             {
                 PlayerTransferParam ptParam = param.CopyBaseParam<PlayerTransferParam>();
-                var pm = IocUnity.GetService<IWorkManager>(typeof(PlayerManager).Name);
-                pm.AddOrUpdateParam(ptParam);
+                PlayerManager.AddOrUpdateParam(ptParam);
             }
         }
     }

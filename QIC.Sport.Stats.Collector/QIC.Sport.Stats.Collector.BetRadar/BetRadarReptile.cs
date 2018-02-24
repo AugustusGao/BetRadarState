@@ -84,6 +84,10 @@ namespace QIC.Sport.Stats.Collector.BetRadar
             IocUnity.RegisterInstance<ICacheManager>(typeof(SeasonEntityManager).Name, seasonEntityManager);
             DicCacheManagers.Add(typeof(SeasonEntityManager).Name, (ICacheManager)seasonEntityManager);
 
+            var seasonTeamsManager = new SeasonTeamsManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(SeasonTeamsManager).Name, seasonTeamsManager);
+            DicCacheManagers.Add(typeof(SeasonTeamsManager).Name, (ICacheManager)seasonTeamsManager);
+
             var teamEntityManager = new TeamEntityManager();
             IocUnity.RegisterInstance<ICacheManager>(typeof(TeamEntityManager).Name, teamEntityManager);
             DicCacheManagers.Add(typeof(TeamEntityManager).Name, (ICacheManager)teamEntityManager);
