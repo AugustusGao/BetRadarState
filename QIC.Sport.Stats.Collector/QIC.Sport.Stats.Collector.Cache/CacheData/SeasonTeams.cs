@@ -15,7 +15,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string SeasonId;
         public List<TeamRank> TeamRankList = new List<TeamRank>();  //  list名次队伍积分数据
 
-        public void CompareTeamRank(List<TeamRank> list)
+        public void CompareSetTeamRank(List<TeamRank> list)
         {
             bool isChanged;
             if (TeamRankList.Count != list.Count)

@@ -31,6 +31,8 @@ E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Colle
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.dll
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.Interception.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\ML.Infrastructure.dll
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\ML.NetComponent.dll
@@ -47,6 +49,8 @@ E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Colle
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\HtmlAgilityPack.xml
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.xml
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.Interception.xml
+E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\obj\Debug\QIC.Sport.Stats.Collector.BetRadar.csprojResolveAssemblyReference.cache
 E:\Work\Qic\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\obj\Debug\QIC.Sport.Stats.Collector.BetRadar.dll

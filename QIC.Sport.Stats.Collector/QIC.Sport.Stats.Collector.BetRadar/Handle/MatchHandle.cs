@@ -65,14 +65,17 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 var ftResult = tr.SelectSingleNode("td[@class='nt ftx ']").InnerText;
 
                 var matchId = RegexGetStr(matchIdStr, "matchid', ", ",");
+                var currentMatch = new MatchEntity();
+                currentMatch.MatchId = matchId;
+                currentMatch.HomeId = RegexGetStr(homeIdStr, "small/", ".png");
+                currentMatch.AwayId = RegexGetStr(awayIdStr, "small/", ".png");
+                currentMatch.MatchDate = matchDate;
+                currentMatch.ExtendedData = "Round = " + round;
+                currentMatch.SportId = param.SportId;
+                currentMatch.SeasonId = param.SeasonId;
+
                 var me = MatchEntityManager.AddOrGetCacheEntity<MatchEntity>(matchId);
-                me.MatchId = matchId;
-                me.HomeId = RegexGetStr(homeIdStr, "small/", ".png");
-                me.AwayId = RegexGetStr(awayIdStr, "small/", ".png");
-                me.MatchDate = matchDate;
-                me.ExtendedData = "Round = " + round;
-                me.SportId = param.SportId;
-                me.SeasonId = param.SeasonId;
+                me.CompareSetMatchInfo(currentMatch);
 
                 if (!string.IsNullOrEmpty(htResult) || !string.IsNullOrEmpty(ftResult))
                 {
@@ -82,7 +85,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         Result = htResult + "_" + ftResult,
                         SportId = param.SportId
                     };
-                    me.MatchResult = result;
+                    me.CompareSetMatchResult(result);
                 }
             }
         }

@@ -18,13 +18,37 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public List<int> SeasonTypeList = new List<int>();
         public List<string> TeamIdList = new List<string>();
 
-        public Dictionary<string, List<string>> CompareTeamIdList(List<string> list)
+        public void CompareSetSeasonInfo(SeasonEntity seasonEntity)
+        {
+            if (
+                SeasonId == seasonEntity.SeasonId &&
+                SportId == seasonEntity.SportId &&
+                SeasonName == seasonEntity.SeasonName &&
+                TotalRound == seasonEntity.TotalRound &&
+                CurrentRound == seasonEntity.CurrentRound
+                ) return;
+
+            SeasonId = seasonEntity.SeasonId;
+            SportId = seasonEntity.SportId;
+            SeasonName = seasonEntity.SeasonName;
+            TotalRound = seasonEntity.TotalRound;
+            CurrentRound = seasonEntity.CurrentRound;
+        }
+        public Dictionary<string, List<string>> CompareSetTeamIdList(List<string> list)
         {
             var adds = list.Except(TeamIdList).ToList();
             var dels = TeamIdList.Except(list).ToList();
 
             TeamIdList = list;
             return new Dictionary<string, List<string>> { { "add", adds }, { "del", dels } };
+        }
+        public Dictionary<string, List<int>> CompareSetSeasonTypeList(List<int> list)
+        {
+            var adds = list.Except(SeasonTypeList).ToList();
+            var dels = SeasonTypeList.Except(list).ToList();
+
+            SeasonTypeList = list;
+            return new Dictionary<string, List<int>> { { "add", adds }, { "del", dels } };
         }
     }
 }

@@ -18,16 +18,16 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
             return TeamId;
         }
 
-        public void CompareTeamEntity(TeamEntity teamEntity)
+        public void CompareSetTeamEntity(TeamEntity teamEntity)
         {
-            if (Equal(teamEntity)) return;
+            if (Equals(teamEntity)) return;
             TeamName = teamEntity.TeamName;
             Venue = teamEntity.Venue;
             Manager = teamEntity.Manager;
             Mark = teamEntity.Mark;
         }
 
-        public override bool Equal(BaseCacheEntity entity)
+        public override bool Equals(object entity)
         {
             TeamEntity teamEntity = entity as TeamEntity;
             return

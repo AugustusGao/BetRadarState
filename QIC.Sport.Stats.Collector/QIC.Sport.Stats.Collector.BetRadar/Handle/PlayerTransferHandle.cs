@@ -40,7 +40,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 th.TeamId = RegexGetStr(node.ChildNodes[0].InnerHtml, "teamid','", "',");
                 th.DuringTime = node.ChildNodes[1].InnerText;
                 th.Description = node.ChildNodes[2].InnerText;
-                player.CompareTransferHistory(th);
+                player.CompareSetTransferHistory(th);
             }
         }
     }

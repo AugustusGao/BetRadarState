@@ -12,5 +12,13 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string SportId;
         public string Result;
         public int ResultStatus;
+        public override bool Equals(object entity)
+        {
+            MatchResultEntity mr = entity as MatchResultEntity;
+            return MatchId == mr.MatchId &&
+                   SportId == mr.SportId &&
+                   Result == mr.Result &&
+                   ResultStatus == mr.ResultStatus;
+        }
     }
 }

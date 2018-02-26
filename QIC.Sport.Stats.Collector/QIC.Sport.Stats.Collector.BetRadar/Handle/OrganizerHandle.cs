@@ -117,7 +117,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 foreach (var kv in dic)
                 {
                     var oe = OrganizerEntityManager.AddOrGetCacheEntity<OrganizerEntity>(kv.Key);
-                    var cpDic = oe.CompareSeasonIds(kv.Value);
+                    var cpDic = oe.CompareSetSeasonIds(kv.Value);
                     NextAssignTask(oe, cpDic);
                 }
                 #endregion
@@ -166,7 +166,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         le.AddSeasonId(seasonId, true);
                         list.Add(seasonId);
                     }
-                    var cpDic = ent.CompareSeasonIds(list);
+                    var cpDic = ent.CompareSetSeasonIds(list);
                     NextAssignTask(ent, cpDic);
                 }
                 #endregion

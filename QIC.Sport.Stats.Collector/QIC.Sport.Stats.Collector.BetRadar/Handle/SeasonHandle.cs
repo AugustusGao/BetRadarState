@@ -32,10 +32,10 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var title = xml.GetAttributeValue("//page", "title");
             var seasonName = title.Split('>').Last();
 
-            SeasonEntity se = SeasonEntityManager.AddOrGetCacheEntity<SeasonEntity>(param.SeasonId);
-            se.SportId = param.SportId;
-            se.SeasonId = param.SeasonId;
-            se.SeasonName = seasonName;
+            SeasonEntity currentSeasonEntity = new SeasonEntity();
+            currentSeasonEntity.SportId = param.SportId;
+            currentSeasonEntity.SeasonId = param.SeasonId;
+            currentSeasonEntity.SeasonName = seasonName;
 
             //  获取积分数据块
             var cdataFlag = "//c";
@@ -47,7 +47,10 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             }
 
             var currentRound = RegexGetStr(cdata[0], "sb-current\"><div class=\"label\">", "<");
-            se.CurrentRound = currentRound;
+            currentSeasonEntity.CurrentRound = currentRound;
+
+            SeasonEntity se = SeasonEntityManager.AddOrGetCacheEntity<SeasonEntity>(param.SeasonId);
+            se.CompareSetSeasonInfo(currentSeasonEntity);
 
             //  解析积分数据，并添加队伍任务,添加队伍积分数据，其他数据可由已经结束的比赛结果计算
             List<string> teamIdList = new List<string>();
@@ -70,11 +73,11 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 trList.Add(tr);
             }
             SeasonTeams st = SeasonTeamsManager.AddOrGetCacheEntity<SeasonTeams>(param.SeasonId);
-            st.CompareTeamRank(trList);
+            st.CompareSetTeamRank(trList);
 
 
             //  要分配的队伍任务
-            var teamTaskDic = se.CompareTeamIdList(teamIdList);
+            var teamTaskDic = se.CompareSetTeamIdList(teamIdList);
             NextAssignTask(param, teamTaskDic);
 
             //  添加联赛层级的比赛任务

@@ -17,5 +17,41 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string MatchDate;
         public string ExtendedData;
         public MatchResultEntity MatchResult;
+
+        public void CompareSetMatchInfo(MatchEntity matchEntity)
+        {
+            if (Equals(matchEntity)) return;
+            MatchId = matchEntity.MatchId;
+            SeasonId = matchEntity.SeasonId;
+            SeasonType = matchEntity.SeasonType;
+            SportId = matchEntity.SportId;
+            HomeId = matchEntity.HomeId;
+            AwayId = matchEntity.AwayId;
+            MatchDate = matchEntity.MatchDate;
+            ExtendedData = matchEntity.ExtendedData;
+        }
+
+        public void CompareSetMatchResult(MatchResultEntity matchResult)
+        {
+            if (matchResult == null) return;
+            if (MatchResult == null || !MatchResult.Equals(matchResult)) MatchResult = matchResult;
+        }
+
+        public override bool Equals(object entity)
+        {
+            MatchEntity me = entity as MatchEntity;
+            return MatchId == me.MatchId &&
+                   SeasonId == me.SeasonId &&
+                   SeasonType == me.SeasonType &&
+                   SportId == me.SportId &&
+                   HomeId == me.HomeId &&
+                   AwayId == me.AwayId &&
+                   MatchDate == me.MatchDate &&
+                   ExtendedData == me.ExtendedData;
+        }
     }
 }
+
+
+
+

@@ -18,7 +18,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public List<string> AssistsPlayerList = new List<string>();   //  助攻list名次PlayerId
         public Dictionary<string, InjurePlayer> InjurePlayerDic = new Dictionary<string, InjurePlayer>();    //  kv = PlayerId--伤停状态描述
         public List<string> AllPlayerIdList = new List<string>();     //  球队名单
-        public Dictionary<string, List<string>> ComparePlayerIdList(List<string> list)
+        public Dictionary<string, List<string>> CompareSetPlayerIdList(List<string> list)
         {
             var adds = list.Except(AllPlayerIdList).ToList();
             var dels = AllPlayerIdList.Except(list).ToList();
@@ -27,7 +27,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
             return new Dictionary<string, List<string>> { { "add", adds }, { "del", dels } };
         }
 
-        public void CompareInjurePlayerList(List<InjurePlayer> list)
+        public void CompareSetInjurePlayerList(List<InjurePlayer> list)
         {
             var newIdList = list.Select(o => o.PlayerId).ToList();
 

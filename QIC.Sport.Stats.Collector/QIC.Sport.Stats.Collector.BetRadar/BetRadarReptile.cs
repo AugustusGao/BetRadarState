@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.InterceptionExtension;
 using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Handle;
 using QIC.Sport.Stats.Collector.ITakerReptile;
@@ -21,8 +23,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar
         {
             InitWorkManager();
             InitCacheManager();
+            InitHandle();
         }
-
         public override void InitWorkManager()
         {
             // todo IOC生成所有Manager并加入到管理集合中
@@ -45,8 +47,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar
 
             //  起始任务添加到OrganizerManager中
             var indexUrl = "gismo.php?&html=1&id=1828&language=zh&clientid=4&child=1&ismenu=1&childnodeid=1819";
-            var param = ParamFactory.CreateParam((int)RBHandleType.Organizer);
-            ((OrganizerParam)param).IndexUrl = indexUrl;
+            var param = new OrganizerParam() { HandleType = (int)RBHandleType.Organizer, IndexUrl = indexUrl };
             organizerManager.AddOrUpdateParam(param);
         }
 
@@ -95,6 +96,20 @@ namespace QIC.Sport.Stats.Collector.BetRadar
             var teamPlayersManager = new TeamPlayersManager();
             IocUnity.RegisterInstance<ICacheManager>(typeof(TeamPlayersManager).Name, teamPlayersManager);
             DicCacheManagers.Add(typeof(TeamPlayersManager).Name, (ICacheManager)teamPlayersManager);
+        }
+        private void InitHandle()
+        {
+            IocUnity.RegisterType<IHandle, OrganizerHandle>(typeof(OrganizerHandle).Name);
+            IocUnity.RegisterType<IHandle, SeasonHandle>(typeof(SeasonHandle).Name);
+            IocUnity.RegisterType<IHandle, TeamHandle>(typeof(TeamHandle).Name);
+            IocUnity.RegisterType<IHandle, PlayerHandle>(typeof(PlayerHandle).Name);
+            IocUnity.RegisterType<IHandle, MatchHandle>(typeof(MatchHandle).Name);
+            IocUnity.RegisterType<IHandle, InjuryHandle>(typeof(InjuryHandle).Name);
+            IocUnity.RegisterType<IHandle, PlayerTransferHandle>(typeof(PlayerTransferHandle).Name);
+
+            //  初始化拦截异常处理通过AOP形式到Unity容器中
+            IocUnity.GetUnityContainer().AddNewExtension<Interception>().Configure<Interception>()
+            .SetDefaultInterceptorFor<IHandle>(new InterfaceInterceptor());
         }
     }
 }

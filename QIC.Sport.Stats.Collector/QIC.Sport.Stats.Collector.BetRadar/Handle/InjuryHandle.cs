@@ -43,7 +43,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 list.Add(injure);
             }
             var tp = TeamPlayersManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
-            tp.CompareInjurePlayerList(list);
+            tp.CompareSetInjurePlayerList(list);
         }
     }
 }

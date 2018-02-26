@@ -22,9 +22,9 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string PreferredFoot;
         public List<TransferHistory> TransferHistorys = new List<TransferHistory>();
 
-        public void CompareInfo(PlayerEntity pe)
+        public void CompareSetInfo(PlayerEntity pe)
         {
-            if (this.Equal(pe)) return;
+            if (this.Equals(pe)) return;
 
             FullName = pe.FullName;
             Country = pe.Country;
@@ -39,7 +39,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
             PreferredFoot = pe.PreferredFoot;
         }
 
-        public void CompareTransferHistory(TransferHistory th)
+        public void CompareSetTransferHistory(TransferHistory th)
         {
             var oldTh = TransferHistorys.FirstOrDefault(o => o.DuringTime == th.DuringTime); //  时间是唯一的
             if (oldTh == null) TransferHistorys.Add(th);
@@ -50,7 +50,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
             }
         }
 
-        public override bool Equal(BaseCacheEntity entity)
+        public override bool Equals(object entity)
         {
             var pe = entity as PlayerEntity;
 

@@ -16,9 +16,9 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public int YellowRedCard;
         public int RedCard;
 
-        public void Compare(PlayerStatisticsRecord record)
+        public void CompareSet(PlayerStatisticsRecord record)
         {
-            if (this.Equal(record)) return;
+            if (this.Equals(record)) return;
             MatchId = record.MatchId;
             PlayerId = record.PlayerId;
             Goals = record.Goals;
@@ -31,6 +31,18 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public override string GetKey()
         {
             return PlayerId + "_" + MatchId;
+        }
+
+        public override bool Equals(object entity)
+        {
+            PlayerStatisticsRecord psr = entity as PlayerStatisticsRecord;
+            return MatchId == psr.MatchId &&
+                   PlayerId == psr.PlayerId &&
+                   Goals == psr.Goals &&
+                   Assists == psr.Assists &&
+                   YellowCard == psr.YellowCard &&
+                   YellowRedCard == psr.YellowRedCard &&
+                   RedCard == psr.RedCard;
         }
     }
 }

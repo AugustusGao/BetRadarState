@@ -1,0 +1,9 @@
+[Header]------
+2018-02-26 15:11:52,342 [27] ERROR QIC.Sport.Stats.Collector.Common.ExceptionLoggerCallHandler - 	Parameters:
+		Param0 -> {"Html":"<?xml version=\"1.0\"?>\n<page generated=\"2018-02-26 03:42:23\" title=\"&#x8DB3;&#x7403; &gt; &#x6CE2;&#x65AF;&#x5C3C;&#x4E9A;&#x548C;&#x9ED1;&#x585E;&#x54E5;&#x7EF4;&#x90A3; &gt; &#x6CE2;&#x9ED1;&#x676F;  2017/18\" GA=\"dimension10_1/dimension11_158/dimension19_1/dimension14_45534/dimension3_overview/dimension12_583/dimension7_6666/dimension8_sportradar\"><n id=\"2477\" c=\"view\" cache=\"86400\"/></page>\n","Param":{"SportId":"1","ContinentId":"1","OrganizerId":"158","SeasonId":"45534","TeamId":null,"PlayerId":null,"HandleType":1}}System.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
+参数名: index
+   在 System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   在 System.Collections.Generic.List`1.get_Item(Int32 index)
+   在 QIC.Sport.Stats.Collector.BetRadar.Handle.SeasonHandle.Process(BaseData data) 位置 e:\Work\QIC\Code\QIC.Sport.Stats\QIC.Sport.Stats.Collector\QIC.Sport.Stats.Collector.BetRadar\Handle\SeasonHandle.cs:行号 49
+   在 DynamicModule.ns.Wrapped_IHandle_9708926fcb5549cfb819c8571fef1289.<Process_DelegateImplementation>__0(IMethodInvocation inputs, GetNextInterceptionBehaviorDelegate getNext)
+

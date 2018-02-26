@@ -66,7 +66,14 @@ namespace QIC.Sport.Stats.Collector.Client
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            reptile.Stop();
+            try
+            {
+                reptile.Stop();
+                System.Environment.Exit(System.Environment.ExitCode);
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 

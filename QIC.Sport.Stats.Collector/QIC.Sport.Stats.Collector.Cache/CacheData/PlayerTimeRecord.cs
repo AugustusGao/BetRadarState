@@ -15,9 +15,9 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public bool IsOutPlay;
         public int MinutesPlayed;
 
-        public void Compare(PlayerTimeRecord record)
+        public void CompareSet(PlayerTimeRecord record)
         {
-            if (this.Equal(record)) return;
+            if (this.Equals(record)) return;
 
             MatchId = record.MatchId;
             PlayerId = record.PlayerId;
@@ -25,6 +25,18 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
             IsInPlay = record.IsInPlay;
             IsOutPlay = record.IsOutPlay;
             MinutesPlayed = record.MinutesPlayed;
+        }
+
+        public override bool Equals(object entity)
+        {
+            PlayerTimeRecord ptr = entity as PlayerTimeRecord;
+
+            return MatchId == ptr.MatchId &&
+                   PlayerId == ptr.PlayerId &&
+                   IsStarting == ptr.IsStarting &&
+                   IsInPlay == ptr.IsInPlay &&
+                   IsOutPlay == ptr.IsOutPlay &&
+                   MinutesPlayed == ptr.MinutesPlayed;
         }
     }
 }

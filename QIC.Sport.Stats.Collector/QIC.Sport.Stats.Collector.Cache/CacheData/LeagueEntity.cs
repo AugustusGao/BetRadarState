@@ -13,7 +13,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public string SportId = "1";
         public string CurrentSeasonId;
 
-        public Dictionary<string, List<string>> CompareSeasonIds(List<string> list)
+        public Dictionary<string, List<string>> CompareSetSeasonIds(List<string> list)
         {
             var adds = list.Except(SeasonIdList).ToList();
             var dels = SeasonIdList.Except(list).ToList();

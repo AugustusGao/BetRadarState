@@ -49,7 +49,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 te.Manager = trsTeam[1].LastChild.InnerText;
                 te.Venue = trsTeam[2].LastChild.InnerText;
                 var teamEntity = TeamEntityManager.AddOrGetCacheEntity<TeamEntity>(te.TeamId);
-                teamEntity.CompareTeamEntity(te);
+                teamEntity.CompareSetTeamEntity(te);
             }
 
             #region  队伍球员相关信息
@@ -85,7 +85,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 list.Add(playerId);
             }
             var tp = TeamPlayersManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
-            var dic = tp.ComparePlayerIdList(list);
+            var dic = tp.CompareSetPlayerIdList(list);
             #endregion
             NextAssignTask(param, dic);
 

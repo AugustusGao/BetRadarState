@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Handle;
 using QIC.Sport.Stats.Collector.Common;
 
@@ -16,25 +17,25 @@ namespace QIC.Sport.Stats.Collector.BetRadar
             switch ((RBHandleType)handleType)
             {
                 case RBHandleType.Organizer:
-                    handle = new OrganizerHandle();
+                    handle = IocUnity.GetService<IHandle>(typeof(OrganizerHandle).Name);
                     break;
                 case RBHandleType.Season:
-                    handle = new SeasonHandle();
+                    handle = IocUnity.GetService<IHandle>(typeof(SeasonHandle).Name);
                     break;
                 case RBHandleType.Team:
-                    handle = new TeamHandle();
+                    handle = IocUnity.GetService<IHandle>(typeof(TeamHandle).Name);
                     break;
                 case RBHandleType.Match:
-                    handle = new MatchHandle();
+                    handle = IocUnity.GetService<IHandle>(typeof(MatchHandle).Name);
                     break;
                 case RBHandleType.Player:
-                    handle = new PlayerHandle();
+                    handle = IocUnity.GetService<IHandle>(typeof(PlayerHandle).Name);
                     break;
                 case RBHandleType.Injury:
-                    handle = new InjuryHandle();
+                    handle = IocUnity.GetService<IHandle>(typeof(InjuryHandle).Name);
                     break;
                 case RBHandleType.PlayerTransfer:
-                    handle = new PlayerTransferHandle();
+                    handle = IocUnity.GetService<IHandle>(typeof(PlayerTransferHandle).Name);
                     break;
                 default:
                     handle = null;
