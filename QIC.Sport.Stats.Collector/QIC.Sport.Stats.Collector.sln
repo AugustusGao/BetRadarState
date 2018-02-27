@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIC.Sport.Stats.Collector.Common", "QIC.Sport.Stats.Collector.Common\QIC.Sport.Stats.Collector.Common.csproj", "{540F8554-8C7C-4D64-AA60-8DC326DB4321}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIC.Sport.Stats.Collector.Cache", "QIC.Sport.Stats.Collector.Cache\QIC.Sport.Stats.Collector.Cache.csproj", "{45ADC638-BE45-4699-ADFC-78C3E020D07A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIC.Sport.Stats.Collector.Client", "QIC.Sport.Stats.Collector.Client\QIC.Sport.Stats.Collector.Client.csproj", "{6699B8D8-537C-4611-9645-607532B151B8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIC.Sport.Stats.Collector.Test", "QIC.Sport.Stats.Collector.Test\QIC.Sport.Stats.Collector.Test.csproj", "{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +39,11 @@ Global
 		{6699B8D8-537C-4611-9645-607532B151B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6699B8D8-537C-4611-9645-607532B151B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6699B8D8-537C-4611-9645-607532B151B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24B75DB1-AB9A-410B-BD10-C97C8B421E5C}
 	EndGlobalSection
 EndGlobal
