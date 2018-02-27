@@ -129,14 +129,15 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
                     Task.WaitAll(executers.ToArray());
                     Task.WaitAll(processers.ToArray());
 
-                    executers.Clear();
-                    processers.Clear();
-                    isCompleted = true;
                     sw.Stop();
 
                     if (sw.Elapsed.TotalSeconds > 10)
-                        logger.Debug(this.GetType().Name + " completed in total seconds = " + sw.Elapsed.TotalSeconds + "s");
+                        logger.Debug(this.GetType().Name + " completed in total seconds = " + sw.Elapsed.TotalSeconds + "s  ,executers count = " + executers.Count() + " ,processers count = " + processers.Count());
                     //Console.WriteLine(this.GetType().Name + " completed in total seconds = " + sw.Elapsed.TotalSeconds + "s");
+
+                    executers.Clear();
+                    processers.Clear();
+                    isCompleted = true;
                 }
                 catch (Exception ex)
                 {
