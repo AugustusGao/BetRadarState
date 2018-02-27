@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -23,10 +24,8 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
         private bool isCompleted;
         private Thread workThread;
 
-        private static readonly LimitedConcurrencyLevelTaskScheduler executerScheduler = new LimitedConcurrencyLevelTaskScheduler(500);
-        private static readonly TaskFactory executerFactory = new TaskFactory(executerScheduler);
-        private static readonly LimitedConcurrencyLevelTaskScheduler processerScheduler = new LimitedConcurrencyLevelTaskScheduler(2);
-        private static readonly TaskFactory processerFactory = new TaskFactory(processerScheduler);
+        private readonly TaskFactory executerFactory;
+        private readonly TaskFactory processerFactory;
         private List<Task> executers = new List<Task>();
         private List<Task> processers = new List<Task>();
 
@@ -35,6 +34,14 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
         public virtual void ExecuteTask(BaseParam param) { }
         public virtual void ProcessData(BaseData data) { }
 
+        public BaseWorkManager()
+        {
+            var executerScheduler = new LimitedConcurrencyLevelTaskScheduler(10);
+            executerFactory = new TaskFactory(executerScheduler);
+            var processerScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
+            processerFactory = new TaskFactory(processerScheduler);
+
+        }
         public void Start()
         {
             logger = LogManager.GetLogger(this.GetType());
@@ -111,8 +118,9 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
             {
                 try
                 {
+                    Stopwatch sw = new Stopwatch();
+                    sw.Start();
                     isCompleted = false;
-
                     foreach (var kv in DicParam)
                     {
                         executers.Add(executerFactory.StartNew(() => ExecuteTask(kv.Value)));
@@ -124,6 +132,11 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
                     executers.Clear();
                     processers.Clear();
                     isCompleted = true;
+                    sw.Stop();
+
+                    if (sw.Elapsed.TotalSeconds > 10)
+                        logger.Debug(this.GetType().Name + " completed in total seconds = " + sw.Elapsed.TotalSeconds + "s");
+                    //Console.WriteLine(this.GetType().Name + " completed in total seconds = " + sw.Elapsed.TotalSeconds + "s");
                 }
                 catch (Exception ex)
                 {
