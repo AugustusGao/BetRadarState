@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIC.Sport.Stats.Collector.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIC.Sport.Stats.Collector.Client", "QIC.Sport.Stats.Collector.Client\QIC.Sport.Stats.Collector.Client.csproj", "{6699B8D8-537C-4611-9645-607532B151B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QIC.Sport.Stats.Collector.Test", "QIC.Sport.Stats.Collector.Test\QIC.Sport.Stats.Collector.Test.csproj", "{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6699B8D8-537C-4611-9645-607532B151B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6699B8D8-537C-4611-9645-607532B151B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6699B8D8-537C-4611-9645-607532B151B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3DCEEBD-F83D-45EF-9A54-8B1BFD715A09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

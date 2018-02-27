@@ -113,7 +113,8 @@ namespace QIC.Sport.Stats.Collector.Common
             CreateXMLElement();
 
             //返回XPath节点的值
-            return _element.SelectSingleNode(xPath).InnerText;
+            var node = _element.SelectSingleNode(xPath);
+            return node == null ? "" : node.InnerText;
         }
         public List<string> GetValues(string xPath)
         {

@@ -8,7 +8,7 @@ using QIC.Sport.Stats.Collector.Common;
 
 namespace QIC.Sport.Stats.Collector.BetRadar
 {
-    [ExceptionHandlerAttribute(Order = 1)]
+    [ExceptionHandler]
     public interface IHandle
     {
         void Process(BaseData data);

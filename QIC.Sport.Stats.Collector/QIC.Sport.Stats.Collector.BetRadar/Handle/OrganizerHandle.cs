@@ -20,16 +20,15 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         public void Process(BaseData data)
         {
             BRData bd = data as BRData;
-            if (string.IsNullOrEmpty(bd.Html)) return;
-            var txt = HttpUtility.HtmlDecode(bd.Html);
+            string txt;
+            if (!HtmlDecode(bd.Html, out txt)) return;
 
             var xml = new XmlHelper(txt);
-            var cdata = "//c";
+            var cdataFlag = "//c";
+            var cdata = xml.GetValue(cdataFlag);
+            if (string.IsNullOrEmpty(cdata)) return;
 
-            var c = xml.GetValue(cdata);
-            HtmlAgilityPack.HtmlDocument d = new HtmlAgilityPack.HtmlDocument();
-            d.LoadHtml(c);
-            var root = d.DocumentNode;
+            var root = GetHtmlRoot(cdata);
 
             var jd2 = root.SelectSingleNode("//li[@class='topelem sport-1']/ul[@class=' jdlvl_2']");
 
@@ -89,6 +88,10 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a2 != null)
                         {
                             var seasonId = RegexGetStr(a2.Value, "seasonid','", "',");
+                            if (string.IsNullOrEmpty(seasonId))
+                            {
+                                continue;
+                            }
                             LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n2.InnerText);
                             le.LeagueName = n2.InnerText;
                             le.AddSeasonId(seasonId, true);
@@ -103,6 +106,10 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         if (a3 != null)
                         {
                             var seasonId = RegexGetStr(a3.Value, "seasonid','", "',");
+                            if (string.IsNullOrEmpty(seasonId))
+                            {
+                                continue;
+                            }
                             LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n3.InnerText);
                             le.LeagueName = n3.InnerText;
                             le.AddSeasonId(seasonId, true);
@@ -161,6 +168,11 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     {
                         var s = ul.ChildNodes[0].Attributes["href"].Value;
                         var seasonId = RegexGetStr(s, "seasonid','", "',");
+                        if (string.IsNullOrEmpty(seasonId))
+                        {
+                            // 业余联赛
+                            continue;
+                        }
                         LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(ul.InnerText);
                         le.LeagueName = ul.InnerText;
                         le.AddSeasonId(seasonId, true);
@@ -191,7 +203,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
                         //  todo 测试只加入西班牙的联赛任务
                         //if (sid == "42556")
-                            LeagueManager.AddOrUpdateParam(sp);
+                        LeagueManager.AddOrUpdateParam(sp);
                     }
                 }
                 else if (kv.Key == "del")

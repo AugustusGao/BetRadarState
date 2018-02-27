@@ -23,8 +23,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             BRData bd = data as BRData;
             SeasonParam param = bd.Param as SeasonParam;
 
-            if (string.IsNullOrEmpty(bd.Html)) return;
-            var txt = HttpUtility.HtmlDecode(bd.Html);
+            string txt;
+            if (!HtmlDecode(bd.Html, out txt)) return;
 
             var xml = new XmlHelper(txt);
 
@@ -40,11 +40,17 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             //  获取积分数据块
             var cdataFlag = "//c";
             var cdata = xml.GetValues(cdataFlag);
+            if (cdata.Count == 0)
+            {
+                //  TODO    杯赛处理
+                return;
+            }
             var html = "";
             if (cdata.Count > 5)
             {
                 html = cdata[4];
             }
+            if (string.IsNullOrEmpty(html)) return;
 
             var currentRound = RegexGetStr(cdata[0], "sb-current\"><div class=\"label\">", "<");
             currentSeasonEntity.CurrentRound = currentRound;

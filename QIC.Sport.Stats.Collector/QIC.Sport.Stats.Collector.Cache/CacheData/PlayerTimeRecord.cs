@@ -26,7 +26,10 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
             IsOutPlay = record.IsOutPlay;
             MinutesPlayed = record.MinutesPlayed;
         }
-
+        public override string GetKey()
+        {
+            return PlayerId + "_" + MatchId;
+        }
         public override bool Equals(object entity)
         {
             PlayerTimeRecord ptr = entity as PlayerTimeRecord;

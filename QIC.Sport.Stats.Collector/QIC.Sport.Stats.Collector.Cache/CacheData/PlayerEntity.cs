@@ -66,6 +66,11 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
                    TeamName == pe.TeamName &&
                    PreferredFoot == pe.PreferredFoot;
         }
+
+        public override string GetKey()
+        {
+            return PlayerId;
+        }
     }
 
     public class TransferHistory

@@ -25,7 +25,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Manager
             EnQueueData(data);
 
             //  测试调整请求间隔时间
-            IntervalsTime = 5 * 1000;
+            //IntervalsTime = 5 * 1000;
             
             //  最佳射手不需要请求数据，可以根据球员参赛记录加上最佳名单的点球数生成最佳射手名单
 

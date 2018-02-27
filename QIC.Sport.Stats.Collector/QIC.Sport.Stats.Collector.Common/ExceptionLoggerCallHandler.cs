@@ -25,7 +25,7 @@ namespace QIC.Sport.Stats.Collector.Common
                     var parameter = JsonConvert.SerializeObject(input.Arguments[i]);
                     sb.AppendFormat("\t\tParam{0} -> {1}", i, parameter.ToString());
                 }
-                sb.AppendLine(result.Exception.ToString());
+                sb.AppendLine("\n" + result.Exception.ToString());
                 logger.Error(sb.ToString());
                 result.Exception = null;
             }

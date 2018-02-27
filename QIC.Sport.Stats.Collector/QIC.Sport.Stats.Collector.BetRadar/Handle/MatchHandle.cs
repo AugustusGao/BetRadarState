@@ -20,8 +20,9 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         {
             BRData bd = data as BRData;
             MatchParam param = bd.Param as MatchParam;
-            if (string.IsNullOrEmpty(bd.Html)) return;
-            var txt = HttpUtility.HtmlDecode(bd.Html);
+
+            string txt;
+            if (!HtmlDecode(bd.Html, out txt)) return;
 
             var xml = new XmlHelper(txt);
 
@@ -55,13 +56,15 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var trs = table.SelectNodes("tbody/tr");
             foreach (var tr in trs)
             {
-
-                var matchDate = tr.SelectSingleNode("td[@class='datetime']").InnerText;
+                var dtNode = tr.SelectSingleNode("td[@class='datetime']");
+                if (dtNode == null) continue;
+                var matchDate = dtNode.InnerText;
                 var matchIdStr = tr.SelectSingleNode("td/a").Attributes["href"].Value;
                 var homeIdStr = tr.SelectSingleNode("td/a/img[@class='home']").Attributes["src"].Value;
                 var awayIdStr = tr.SelectSingleNode("td/a/img[@class='away']").Attributes["src"].Value;
 
-                var htResult = tr.SelectSingleNode("td[@class='p1 ']").InnerText;
+                var p1 = tr.SelectSingleNode("td[@class='p1 ']");
+                var htResult = p1 == null ? "" : p1.InnerText;
                 var ftResult = tr.SelectSingleNode("td[@class='nt ftx ']").InnerText;
 
                 var matchId = RegexGetStr(matchIdStr, "matchid', ", ",");

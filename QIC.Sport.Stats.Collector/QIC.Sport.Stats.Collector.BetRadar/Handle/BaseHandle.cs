@@ -34,6 +34,25 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         protected static readonly ICacheManager SeasonTeamsManager = IocUnity.GetService<ICacheManager>(typeof(SeasonTeamsManager).Name);
         protected static readonly ICacheManager TeamEntityManager = IocUnity.GetService<ICacheManager>(typeof(TeamEntityManager).Name);
         protected static readonly ICacheManager TeamPlayersManager = IocUnity.GetService<ICacheManager>(typeof(TeamPlayersManager).Name);
+
+        public bool HtmlDecode(string html, out string txt)
+        {
+            txt = "";
+            if (string.IsNullOrEmpty(html)) return false;
+            if (html.Contains("error"))
+                throw new Exception("Cannot parse error page.");
+            txt = HttpUtility.HtmlDecode(html);
+            return true;
+        }
+
+        public HtmlNode GetHtmlRoot(string html)
+        {
+            HtmlAgilityPack.HtmlDocument d = new HtmlAgilityPack.HtmlDocument();
+            d.LoadHtml(html);
+            var root = d.DocumentNode;
+            return root;
+        }
+
         /// <summary>
         /// 正则获取指定字串之间的字符串
         /// </summary>
@@ -47,12 +66,5 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             return rg.Match(originStr).Value;
         }
 
-        public HtmlNode GetHtmlRoot(string html)
-        {
-            HtmlAgilityPack.HtmlDocument d = new HtmlAgilityPack.HtmlDocument();
-            d.LoadHtml(html);
-            var root = d.DocumentNode;
-            return root;
-        }
     }
 }

@@ -23,8 +23,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             BRData bd = data as BRData;
             TeamParam param = bd.Param as TeamParam;
 
-            if (string.IsNullOrEmpty(bd.Html)) return;
-            var txt = HttpUtility.HtmlDecode(bd.Html);
+            string txt;
+            if (!HtmlDecode(bd.Html, out txt)) return;
 
             var xml = new XmlHelper(txt);
 
@@ -55,6 +55,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             #region  队伍球员相关信息
 
             //  解析进球数获得队员的点球个数，更新到队员点球信息缓存中
+            if (cdata.Count < 16) return;// 此队伍无队员信息，克罗地亚乙级联赛->卢科
+
             var penGoals = cdata[14];
             root = GetHtmlRoot(penGoals);
             var trsPenGoals = root.SelectNodes("//tbody/tr");
@@ -74,20 +76,29 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             }
 
             //  解析全部名单，并添加球员任务
-            var playersData = cdata[16];
+            var playersData = cdata.FirstOrDefault(o => o.Contains("teampage_squad"));
+            if (playersData == null)
+            {
+                return;
+            }
             root = GetHtmlRoot(playersData);
             var trsPlayer = root.SelectNodes("//tbody/tr");
-            List<string> list = new List<string>();
-            foreach (var tr in trsPlayer)
+            if (trsPlayer != null)
             {
-                var s = tr.Attributes["onclick"].Value;
-                var playerId = RegexGetStr(s, "playerid', '", "',");
-                list.Add(playerId);
+                List<string> list = new List<string>();
+                foreach (var tr in trsPlayer)
+                {
+                    var s = tr.Attributes["onclick"].Value;
+                    var playerId = RegexGetStr(s, "playerid', '", "',");
+                    list.Add(playerId);
+                }
+                var tp = TeamPlayersManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
+                tp.TeamId = param.TeamId;
+                tp.SeasonId = param.SeasonId;
+                var dic = tp.CompareSetPlayerIdList(list);
+                NextAssignTask(param, dic);
             }
-            var tp = TeamPlayersManager.AddOrGetCacheEntity<TeamPlayers>(param.TeamId + "_" + param.SeasonId);
-            var dic = tp.CompareSetPlayerIdList(list);
             #endregion
-            NextAssignTask(param, dic);
 
             //  如果有添加获取伤停的任务
             if (txt.IndexOf("o=\"1003\"") > 0)

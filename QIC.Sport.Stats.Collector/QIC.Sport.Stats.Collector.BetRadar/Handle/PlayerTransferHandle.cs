@@ -22,14 +22,15 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             BRData bd = data as BRData;
             PlayerTransferParam param = bd.Param as PlayerTransferParam;
 
-            if (string.IsNullOrEmpty(bd.Html)) return;
-            var txt = HttpUtility.HtmlDecode(bd.Html);
+            string txt;
+            if (!HtmlDecode(bd.Html, out txt)) return;
 
             var xml = new XmlHelper(txt);
 
             //  解析成各个数据块
             var cdataFlag = "//c";
             var cdata = xml.GetValue(cdataFlag);
+            if (string.IsNullOrEmpty(cdata)) return;
 
             var root = GetHtmlRoot(cdata);
             var tbody = root.SelectSingleNode("//tbody");

@@ -22,8 +22,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             BRData bd = data as BRData;
             PlayerParam param = bd.Param as PlayerParam;
 
-            if (string.IsNullOrEmpty(bd.Html)) return;
-            var txt = HttpUtility.HtmlDecode(bd.Html);
+            string txt;
+            if (!HtmlDecode(bd.Html, out txt)) return;
 
             var xml = new XmlHelper(txt);
 
@@ -35,33 +35,67 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             var playerInfo = cdata[1];
             var root = GetHtmlRoot(playerInfo);
             var tbody = root.SelectSingleNode("//div[@class='multiview_wrap']/table/tbody");
-            var tds = tbody.SelectNodes("tr/td[@class='last ']");
-            var tdCount = tds.Count;
-            if (tdCount >= 10)
-            {
-                var currentPlayerEntity = new PlayerEntity()
-                {
-                    PlayerId = param.PlayerId,
-                    FullName = tds[0].InnerText,
-                    Country = tds[1].InnerText,
-                    SecondaryCountry = tdCount == 11 ? tds[2].InnerText : "",
-                    Birth = tds[tdCount - 8].InnerText,
-                    Age = tds[tdCount - 7].InnerText,
-                    Height = tds[tdCount - 6].InnerText,
-                    Weight = tds[tdCount - 5].InnerText,
-                    Position = tds[tdCount - 4].InnerText,
-                    ShirtNumber = tds[tdCount - 3].InnerText,
-                    TeamName = tds[tdCount - 2].InnerText,
-                    PreferredFoot = tds[tdCount - 1].InnerText,
-                };
 
-                var pe = PlayerEntityManager.AddOrGetCacheEntity<PlayerEntity>(param.PlayerId);
-                pe.CompareSetInfo(currentPlayerEntity);
-            }
-            else
+            Dictionary<string, string> infoDic = new Dictionary<string, string>();
+            foreach (var node in tbody.ChildNodes)
             {
-                //  todo 队员信息很少的情况
+                infoDic.Add(node.ChildNodes[0].InnerText, node.ChildNodes[1].InnerText);
             }
+            var currentPlayerEntity = new PlayerEntity() { PlayerId = param.PlayerId };
+            foreach (var info in infoDic)
+            {
+                switch (info.Key)
+                {
+                    case "全名:":
+                    case "姓名:":
+                    case "Full name:":
+                    case "Name:":
+                        currentPlayerEntity.FullName = info.Value;
+                        break;
+                    case "国家:":
+                    case "Country:":
+                        currentPlayerEntity.Country = info.Value;
+                        break;
+                    case "第二国籍:":
+                    case "Secondary country:":
+                        currentPlayerEntity.SecondaryCountry = info.Value;
+                        break;
+                    case "出生日期:":
+                    case "Date of birth:":
+                        currentPlayerEntity.Birth = info.Value;
+                        break;
+                    case "年龄:":
+                    case "Age:":
+                        currentPlayerEntity.Age = info.Value;
+                        break;
+                    case "身高:":
+                    case "Height:":
+                        currentPlayerEntity.Height = info.Value;
+                        break;
+                    case "体重:":
+                    case "Weight:":
+                        currentPlayerEntity.Weight = info.Value;
+                        break;
+                    case "位置:":
+                    case "Position:":
+                        currentPlayerEntity.Position = info.Value;
+                        break;
+                    case "球衣号码:":
+                    case "Shirt number:":
+                        currentPlayerEntity.ShirtNumber = info.Value;
+                        break;
+                    case "球队:":
+                    case "Team:":
+                        currentPlayerEntity.TeamName = info.Value;
+                        break;
+                    case "惯用脚:":
+                    case "Preferred foot:":
+                        currentPlayerEntity.PreferredFoot = info.Value;
+                        break;
+                }
+            }
+            var pe = PlayerEntityManager.AddOrGetCacheEntity<PlayerEntity>(param.PlayerId);
+            pe.CompareSetInfo(currentPlayerEntity);
 
             //  解析全部参赛记录
             //  记录比赛Id

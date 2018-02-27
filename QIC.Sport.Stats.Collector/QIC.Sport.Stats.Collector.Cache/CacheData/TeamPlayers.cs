@@ -29,12 +29,16 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
 
         public void CompareSetInjurePlayerList(List<InjurePlayer> list)
         {
-            var newIdList = list.Select(o => o.PlayerId).ToList();
+            var dic = new Dictionary<string, InjurePlayer>();
+            foreach (var l in list)
+            {
+                if (dic.ContainsKey(l.PlayerId)) continue;
+                dic.Add(l.PlayerId, l);
+            }
+            var adds = dic.Keys.Except(InjurePlayerDic.Keys).ToList();
+            var dels = InjurePlayerDic.Keys.Except(dic.Keys).ToList();
 
-            var adds = newIdList.Except(InjurePlayerDic.Keys).ToList();
-            var dels = newIdList.Except(InjurePlayerDic.Keys).ToList();
-
-            InjurePlayerDic = list.ToDictionary(o => o.PlayerId, o => o);
+            InjurePlayerDic = dic;
         }
 
         /// <summary>
