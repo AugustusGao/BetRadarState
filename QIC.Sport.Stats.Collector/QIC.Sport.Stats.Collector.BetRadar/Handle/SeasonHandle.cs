@@ -50,7 +50,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             {
                 html = cdata[4];
             }
-            if (string.IsNullOrEmpty(html)) return;
+            if (string.IsNullOrEmpty(html))
+                return;
 
             var currentRound = RegexGetStr(cdata[0], "sb-current\"><div class=\"label\">", "<");
             currentSeasonEntity.CurrentRound = currentRound;

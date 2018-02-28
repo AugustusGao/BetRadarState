@@ -61,7 +61,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ML.Infrastructure">
-      <HintPath>E:\Work\QIC\lib\ML.Infrastructure.dll</HintPath>
+      <HintPath>..\..\..\..\lib\ML.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="ML.NetComponent">
       <HintPath>..\..\..\..\lib\ML.NetComponent.dll</HintPath>

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
+using ML.Infrastructure.Config;
 using ML.NetComponent.Http;
 using QIC.Sport.Stats.Collector.Common;
 using QIC.Sport.Stats.Collector.ITakerReptile.Dto;
@@ -18,14 +19,14 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
     {
         protected ConcurrentDictionary<string, BaseParam> DicParam = new ConcurrentDictionary<string, BaseParam>();
         protected ILog logger;
-        protected int IntervalsTime = 10;    //  测试间隔时间调整
+        protected int IntervalsTime = 10;    
 
         private bool isClosed;
         private bool isCompleted;
         private Thread workThread;
 
-        private readonly TaskFactory executerFactory;
-        private readonly TaskFactory processerFactory;
+        private TaskFactory executerFactory;
+        private TaskFactory processerFactory;
         private List<Task> executers = new List<Task>();
         private List<Task> processers = new List<Task>();
 
@@ -35,21 +36,14 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
         public virtual void ExecuteTask(BaseParam param) { }
         public virtual void ProcessData(BaseData data) { }
 
-        public BaseWorkManager()
-        {
-            var executerScheduler = new LimitedConcurrencyLevelTaskScheduler(10);
-            executerFactory = new TaskFactory(executerScheduler);
-            var processerScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
-            processerFactory = new TaskFactory(processerScheduler);
-
-        }
         public void Start()
         {
             logger = LogManager.GetLogger(this.GetType());
+            InitTaskFactory();
+
             workThread = new Thread(Work);
             workThread.Start();
-            var name = this.GetType().Name;
-            Console.WriteLine(name + " Start Ok!");
+            Console.WriteLine( this.GetType().Name + " Start Ok!");
         }
 
         public void Stop()
@@ -148,6 +142,17 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
 
                 Thread.Sleep(IntervalsTime);
             }
+        }
+
+        private void InitTaskFactory()
+        {
+            var countStr = ConfigSingleton.CreateInstance().GetAppConfig<string>(this.GetType().Name, "3,1");
+            var executerThreadCount = Convert.ToInt32(countStr.Split(',')[0]);
+            var processerThreadCount = Convert.ToInt32(countStr.Split(',')[1]);
+            var executerScheduler = new LimitedConcurrencyLevelTaskScheduler(executerThreadCount);
+            executerFactory = new TaskFactory(executerScheduler);
+            var processerScheduler = new LimitedConcurrencyLevelTaskScheduler(processerThreadCount);
+            processerFactory = new TaskFactory(processerScheduler);
         }
     }
 }
