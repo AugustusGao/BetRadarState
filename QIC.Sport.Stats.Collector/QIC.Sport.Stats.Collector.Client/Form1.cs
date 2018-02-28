@@ -28,6 +28,9 @@ namespace QIC.Sport.Stats.Collector.Client
         {
             InitializeComponent();
             tw = new TextBoxWriter(this.textBox1);
+
+            //HandleProcessTest();
+
         }
 
         private void HandleProcessTest()
