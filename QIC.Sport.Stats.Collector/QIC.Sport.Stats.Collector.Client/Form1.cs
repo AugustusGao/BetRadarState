@@ -75,6 +75,12 @@ namespace QIC.Sport.Stats.Collector.Client
             {
             }
         }
+
+        private void btnShowCount_Click(object sender, EventArgs e)
+        {
+            var br = reptile as BetRadarReptile;
+            br.ShowCount();
+        }
     }
 
     public class TextBoxWriter : System.IO.TextWriter

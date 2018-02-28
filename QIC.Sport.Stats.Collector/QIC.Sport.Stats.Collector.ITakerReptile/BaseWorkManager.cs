@@ -30,6 +30,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
         private List<Task> processers = new List<Task>();
 
         public bool IsCompleted { get { return isCompleted; } }
+        public int Count { get { return DicParam.Count; } }
 
         public virtual void ExecuteTask(BaseParam param) { }
         public virtual void ProcessData(BaseData data) { }
@@ -142,6 +143,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
                 catch (Exception ex)
                 {
                     logger.Error(ex.ToString());
+                    Thread.Sleep(IntervalsTime);
                 }
 
                 Thread.Sleep(IntervalsTime);

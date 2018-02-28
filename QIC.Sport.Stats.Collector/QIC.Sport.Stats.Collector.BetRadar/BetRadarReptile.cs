@@ -111,5 +111,22 @@ namespace QIC.Sport.Stats.Collector.BetRadar
             IocUnity.GetUnityContainer().AddNewExtension<Interception>().Configure<Interception>()
             .SetDefaultInterceptorFor<IHandle>(new InterfaceInterceptor());
         }
+
+        public void ShowCount()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var wm in DicWorkManagers)
+            {
+                sb.AppendLine(wm.Key + " count = " + wm.Value.Count);
+            }
+
+            foreach (var cm in DicCacheManagers)
+            {
+                sb.AppendLine(cm.Key + " count = " + cm.Value.Count);
+            }
+            var txt = "\n" + sb.ToString();
+            Console.WriteLine(txt);
+            log4net.LogManager.GetLogger(typeof(BetRadarReptile)).Info(txt);
+        }
     }
 }

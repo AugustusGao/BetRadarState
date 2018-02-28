@@ -10,6 +10,8 @@ namespace QIC.Sport.Stats.Collector.Cache
     public class BaseCacheManager : ICacheManager
     {
         protected ConcurrentDictionary<string, BaseCacheEntity> DicCacheData = new ConcurrentDictionary<string, BaseCacheEntity>();
+
+        public int Count { get { return DicCacheData.Count; } }
         public T AddOrGetCacheEntity<T>(string key) where T : BaseCacheEntity, new()
         {
             T ret = new T();

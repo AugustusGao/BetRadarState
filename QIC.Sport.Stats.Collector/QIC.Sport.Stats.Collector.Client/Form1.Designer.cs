@@ -30,6 +30,7 @@
         {
             this.btnStart = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnShowCount = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStart
@@ -50,11 +51,22 @@
             this.textBox1.Size = new System.Drawing.Size(587, 212);
             this.textBox1.TabIndex = 1;
             // 
+            // btnShowCount
+            // 
+            this.btnShowCount.Location = new System.Drawing.Point(501, 27);
+            this.btnShowCount.Name = "btnShowCount";
+            this.btnShowCount.Size = new System.Drawing.Size(75, 23);
+            this.btnShowCount.TabIndex = 2;
+            this.btnShowCount.Text = "ShowCount";
+            this.btnShowCount.UseVisualStyleBackColor = true;
+            this.btnShowCount.Click += new System.EventHandler(this.btnShowCount_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 303);
+            this.Controls.Add(this.btnShowCount);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnStart);
             this.Name = "Form1";
@@ -69,6 +81,7 @@
 
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnShowCount;
     }
 }
 

@@ -10,5 +10,6 @@ namespace QIC.Sport.Stats.Collector.Cache
     {
         T AddOrGetCacheEntity<T>(string key) where T : BaseCacheEntity, new();
         void Remove(string key);
+        int Count { get; }
     }
 }

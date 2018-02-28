@@ -7,12 +7,13 @@ using QIC.Sport.Stats.Collector.ITakerReptile.Dto;
 
 namespace QIC.Sport.Stats.Collector.ITakerReptile
 {
-   public interface IWorkManager
+    public interface IWorkManager
     {
         void AddOrUpdateParam(BaseParam baseParam);
         void RemoveParam(BaseParam baseParam);
         void EnQueueData(BaseData baseData);
         void Start();
         void Stop();
+        int Count { get; }
     }
 }
