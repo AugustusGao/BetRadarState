@@ -22,6 +22,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         {
             BRData bd = data as BRData;
             TeamParam param = bd.Param as TeamParam;
+            CheckSetHistoryParam(param);
 
             string txt;
             if (!HtmlDecode(bd.Html, out txt)) return;
@@ -47,7 +48,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             if (trsTeam.Count == 2)
             {
                 te.Manager = trsTeam[1].LastChild.InnerText;
-            }else if (trsTeam.Count > 2)
+            }
+            else if (trsTeam.Count > 2)
             {
                 te.Manager = trsTeam[1].LastChild.InnerText;
                 te.Venue = trsTeam[2].LastChild.InnerText;
@@ -60,15 +62,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             //  解析进球数获得队员的点球个数，更新到队员点球信息缓存中
             if (cdata.Count < 16) return;// 此队伍无队员信息，克罗地亚乙级联赛->卢科
 
-            var penGoals = "";
-            foreach (var d in cdata)
-            {
-                if (d.IndexOf("normaltable toplist") > 0)
-                {
-                    penGoals = d;
-                    break;
-                }
-            }
+            var penGoals = GetDataLikeKey(cdata, "normaltable toplist");
+            if (string.IsNullOrEmpty(penGoals)) return;
 
             root = GetHtmlRoot(penGoals);
             var trsPenGoals = root.SelectNodes("//tbody/tr");

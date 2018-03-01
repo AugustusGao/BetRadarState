@@ -49,6 +49,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Param
                 SeasonId = SeasonId,
                 TeamId = TeamId,
                 PlayerId = PlayerId,
+                IsHistoryParam = IsHistoryParam,
             };
             return t;
         }

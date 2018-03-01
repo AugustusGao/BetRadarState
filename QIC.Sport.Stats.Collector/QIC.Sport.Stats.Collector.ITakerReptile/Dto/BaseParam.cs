@@ -10,6 +10,8 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile.Dto
     public class BaseParam
     {
         public int HandleType { get; set; }
+        public bool IsHistoryParam;
+        public bool IsHistoryComplete;
         public virtual string GetKey() { return null; }
     }
 }

@@ -21,6 +21,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         {
             BRData bd = data as BRData;
             PlayerParam param = bd.Param as PlayerParam;
+            CheckSetHistoryParam(param);
 
             string txt;
             if (!HtmlDecode(bd.Html, out txt)) return;

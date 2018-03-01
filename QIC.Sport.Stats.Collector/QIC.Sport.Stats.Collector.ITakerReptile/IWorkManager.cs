@@ -9,6 +9,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
 {
     public interface IWorkManager
     {
+        bool IsExist(BaseParam baseParam);
         void AddOrUpdateParam(BaseParam baseParam);
         void RemoveParam(BaseParam baseParam);
         void EnQueueData(BaseData baseData);

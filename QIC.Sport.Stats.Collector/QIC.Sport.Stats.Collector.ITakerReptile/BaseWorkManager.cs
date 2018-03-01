@@ -19,7 +19,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
     {
         protected ConcurrentDictionary<string, BaseParam> DicParam = new ConcurrentDictionary<string, BaseParam>();
         protected ILog logger;
-        protected int IntervalsTime = 10;    
+        protected int IntervalsTime = 10;
 
         private bool isClosed;
         private bool isCompleted;
@@ -43,7 +43,7 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
 
             workThread = new Thread(Work);
             workThread.Start();
-            Console.WriteLine( this.GetType().Name + " Start Ok!");
+            Console.WriteLine(this.GetType().Name + " Start Ok!");
         }
 
         public void Stop()
@@ -51,11 +51,16 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
             isClosed = true;
         }
 
+        public bool IsExist(BaseParam baseParam)
+        {
+            return DicParam.ContainsKey(baseParam.GetKey());
+        }
         public void AddOrUpdateParam(BaseParam baseParam)
         {
             //  对比更新
             DicParam.AddOrUpdate(baseParam.GetKey(), baseParam, (k, v) =>
             {
+                if (v.IsHistoryParam && v.IsHistoryComplete) return v;
                 v = baseParam;
                 return v;
             });
@@ -118,6 +123,11 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
                     isCompleted = false;
                     foreach (var kv in DicParam)
                     {
+                        if (kv.Value.IsHistoryParam && !kv.Value.IsHistoryComplete)
+                        {
+                            logger.Info("History task = " + kv.Value.GetKey());
+                        }
+                        if (kv.Value.IsHistoryParam && kv.Value.IsHistoryComplete) continue;
                         executers.Add(executerFactory.StartNew(() => ExecuteTask(kv.Value)));
                     }
 

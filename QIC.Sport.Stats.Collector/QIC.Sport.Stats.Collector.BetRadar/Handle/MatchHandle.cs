@@ -20,17 +20,50 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         {
             BRData bd = data as BRData;
             MatchParam param = bd.Param as MatchParam;
+            CheckSetHistoryParam(param);
 
             string txt;
             if (!HtmlDecode(bd.Html, out txt)) return;
-
             var xml = new XmlHelper(txt);
 
             //  解析成各个数据块
             var cdataFlag = "//c";
             var cdata = xml.GetValues(cdataFlag);
 
-            var matchData = cdata[15];
+            //  获取历史赛季Id，添加到联赛任务，只抓取一次
+            var historySeasonIdData = GetDataLikeKey(cdata, "sb-wrapper", "lang-1");
+            var currentSeasonId = "";
+            var historySeasonIdList = new List<string>();
+            if (historySeasonIdData != null)
+            {
+                var rootHistory = GetHtmlRoot(historySeasonIdData);
+                var ul = rootHistory.SelectSingleNode("//div[@class='sb-scrollbox']/ul");
+                foreach (var li in ul.ChildNodes)
+                {
+                    if (li.OuterHtml.Contains("active"))
+                    {
+                        currentSeasonId = RegexGetStr(li.OuterHtml, "'5_", ",");
+                        continue;
+                    }
+                    var id = RegexGetStr(li.OuterHtml, "'5_", ",");
+                    historySeasonIdList.Add(id);
+
+                    var sp = param.CopyCreateParam<SeasonParam>();
+                    sp.IsHistoryParam = true;
+                    sp.SeasonId = id;
+                    LeagueManager.AddOrUpdateParam(sp);
+                }
+            }
+            if (!string.IsNullOrEmpty(currentSeasonId) && historySeasonIdList.Count > 0)
+            {
+                var se = SeasonEntityManager.AddOrGetCacheEntity<SeasonEntity>(currentSeasonId);
+                se.HistorySeasonIdList = historySeasonIdList;   //  直接赋值，历史id不会有变化
+            }
+
+            //  解析比赛
+            var matchData = GetDataLikeKey(cdata, "normaltable fixtures");
+            if (string.IsNullOrEmpty(matchData)) return;
+
             var root = GetHtmlRoot(matchData);
 
             bool isTitle = true;

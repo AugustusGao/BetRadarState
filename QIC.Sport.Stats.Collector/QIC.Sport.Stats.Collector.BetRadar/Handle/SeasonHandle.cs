@@ -22,6 +22,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         {
             BRData bd = data as BRData;
             SeasonParam param = bd.Param as SeasonParam;
+            CheckSetHistoryParam(param);
 
             string txt;
             if (!HtmlDecode(bd.Html, out txt)) return;
@@ -175,18 +176,12 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             }
             var se = SeasonEntityManager.AddOrGetCacheEntity<SeasonEntity>(param.SeasonId);
             var dic = se.CompareSetSeasonTypeList(list);
-            SeasonTypeAssignTask(param, dic);
+            //  SeasonTypeAssignTask(param, dic);   除了type=21外的其他类型无需要的数据暂时不用请求处理
 
             //  解析21类型即分组信息，并添加任务
-            var tableData = "";
-            foreach (var d in cdata)
-            {
-                if (d.IndexOf("template_cornerbox template_First") > 0)
-                {
-                    tableData = d;
-                    break;
-                }
-            }
+            var tableData = GetDataLikeKey(cdata, "template_cornerbox template_First");
+            if (string.IsNullOrEmpty(tableData)) return;
+
             root = GetHtmlRoot(tableData);
             var tableIdList = new List<string>();
             var h2s = root.SelectNodes("//div[@class='multiview_wrap']/h2");

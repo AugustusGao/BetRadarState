@@ -8,6 +8,7 @@ using System.Web;
 using HtmlAgilityPack;
 using ML.Infrastructure.IOC;
 using QIC.Sport.Stats.Collector.BetRadar.Manager;
+using QIC.Sport.Stats.Collector.BetRadar.Param;
 using QIC.Sport.Stats.Collector.Cache.CacheDataManager;
 using QIC.Sport.Stats.Collector.Common;
 using QIC.Sport.Stats.Collector.ITakerReptile;
@@ -53,6 +54,33 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             d.LoadHtml(html);
             var root = d.DocumentNode;
             return root;
+        }
+
+        public void CheckSetHistoryParam(BRBaseParam param)
+        {
+            if (param.IsHistoryParam) 
+                param.IsHistoryComplete = true;
+        }
+        public static string GetDataLikeKey(List<string> cdata, string likeKey, string notLikeKey = null)
+        {
+            string ret = null;
+            foreach (var d in cdata)
+            {
+                if (d.Contains(likeKey))
+                {
+                    if (string.IsNullOrEmpty(notLikeKey))
+                    {
+                        ret = d;
+                        break;
+                    }
+                    else if (!d.Contains(notLikeKey))
+                    {
+                        ret = d;
+                        break;
+                    }
+                }
+            }
+            return ret;
         }
 
         /// <summary>

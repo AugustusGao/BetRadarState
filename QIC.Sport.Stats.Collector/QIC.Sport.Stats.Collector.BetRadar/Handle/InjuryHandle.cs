@@ -18,6 +18,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             //  解析队伍伤停人员缓存到TeamPlayers中
             BRData bd = data as BRData;
             InjuryParam param = bd.Param as InjuryParam;
+            CheckSetHistoryParam(param);
 
             string txt;
             if (!HtmlDecode(bd.Html, out txt)) return;
