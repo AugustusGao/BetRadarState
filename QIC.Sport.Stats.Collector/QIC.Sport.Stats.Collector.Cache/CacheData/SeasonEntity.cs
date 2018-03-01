@@ -17,7 +17,6 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         public int Status;
         public List<string> SeasonTypeList = new List<string>();
         public List<string> TeamIdList = new List<string>();
-        public List<string> HistorySeasonIdList = new List<string>();
 
         public void CompareSetSeasonInfo(SeasonEntity seasonEntity)
         {

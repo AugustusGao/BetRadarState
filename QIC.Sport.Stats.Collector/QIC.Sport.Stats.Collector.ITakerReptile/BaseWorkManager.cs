@@ -123,10 +123,6 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
                     isCompleted = false;
                     foreach (var kv in DicParam)
                     {
-                        if (kv.Value.IsHistoryParam && !kv.Value.IsHistoryComplete)
-                        {
-                            logger.Info("History task = " + kv.Value.GetKey());
-                        }
                         if (kv.Value.IsHistoryParam && kv.Value.IsHistoryComplete) continue;
                         executers.Add(executerFactory.StartNew(() => ExecuteTask(kv.Value)));
                     }

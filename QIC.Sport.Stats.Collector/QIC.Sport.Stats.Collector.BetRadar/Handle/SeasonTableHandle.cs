@@ -52,6 +52,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     TeamPoints = points,
                     Description = description
                 };
+                list.Add(rank);
             }
             ti.CompareTableRank(list);
         }

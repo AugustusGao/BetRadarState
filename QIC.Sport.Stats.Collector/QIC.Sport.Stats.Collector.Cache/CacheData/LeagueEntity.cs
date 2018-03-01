@@ -30,7 +30,7 @@ namespace QIC.Sport.Stats.Collector.Cache.CacheData
         }
         public override string GetKey()
         {
-            return LeagueName;
+            return CurrentSeasonId;
         }
     }
 }

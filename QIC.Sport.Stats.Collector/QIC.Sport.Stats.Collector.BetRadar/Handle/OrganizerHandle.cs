@@ -92,7 +92,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                             {
                                 continue;
                             }
-                            LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n2.InnerText);
+                            LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(seasonId);
                             le.LeagueName = n2.InnerText;
                             le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
@@ -110,7 +110,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                             {
                                 continue;
                             }
-                            LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(n3.InnerText);
+                            LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(seasonId);
                             le.LeagueName = n3.InnerText;
                             le.AddSeasonId(seasonId, true);
                             if (!string.IsNullOrEmpty(seasonId))
@@ -173,7 +173,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                             // 业余联赛
                             continue;
                         }
-                        LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(ul.InnerText);
+                        LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(seasonId);
                         le.LeagueName = ul.InnerText;
                         le.AddSeasonId(seasonId, true);
                         list.Add(seasonId);
@@ -212,7 +212,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         //if (sid == "10876")
 
                         //其他指定测试
-                        //if(sid=="44070")
+                        //if(sid=="46176")
                         #endregion
 
                         LeagueManager.AddOrUpdateParam(sp);

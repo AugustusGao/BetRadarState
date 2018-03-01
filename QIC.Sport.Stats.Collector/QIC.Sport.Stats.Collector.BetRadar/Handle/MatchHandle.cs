@@ -32,21 +32,15 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
             //  获取历史赛季Id，添加到联赛任务，只抓取一次
             var historySeasonIdData = GetDataLikeKey(cdata, "sb-wrapper", "lang-1");
-            var currentSeasonId = "";
-            var historySeasonIdList = new List<string>();
+            var seasonIdList = new List<string>();
             if (historySeasonIdData != null)
             {
                 var rootHistory = GetHtmlRoot(historySeasonIdData);
                 var ul = rootHistory.SelectSingleNode("//div[@class='sb-scrollbox']/ul");
                 foreach (var li in ul.ChildNodes)
                 {
-                    if (li.OuterHtml.Contains("active"))
-                    {
-                        currentSeasonId = RegexGetStr(li.OuterHtml, "'5_", ",");
-                        continue;
-                    }
                     var id = RegexGetStr(li.OuterHtml, "'5_", ",");
-                    historySeasonIdList.Add(id);
+                    seasonIdList.Add(id);
 
                     var sp = param.CopyCreateParam<SeasonParam>();
                     sp.IsHistoryParam = true;
@@ -54,10 +48,10 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     LeagueManager.AddOrUpdateParam(sp);
                 }
             }
-            if (!string.IsNullOrEmpty(currentSeasonId) && historySeasonIdList.Count > 0)
+             if (!param.IsHistoryParam && seasonIdList.Any())
             {
-                var se = SeasonEntityManager.AddOrGetCacheEntity<SeasonEntity>(currentSeasonId);
-                se.HistorySeasonIdList = historySeasonIdList;   //  直接赋值，历史id不会有变化
+                var le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(param.SeasonId);
+                le.CompareSetSeasonIds(seasonIdList);
             }
 
             //  解析比赛
@@ -74,7 +68,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 {
                     case "#text":
                         continue;
-                    case "h2": if (isTitle) isTitle = false;
+                    case "h2":
+                        if (isTitle) isTitle = false;
                         else round = node.InnerText;
                         continue;
                     case "table":
