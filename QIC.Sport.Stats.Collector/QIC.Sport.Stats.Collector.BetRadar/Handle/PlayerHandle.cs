@@ -140,7 +140,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             //  如果有添加获取转会记录的任务
             if (txt.IndexOf("o=\"2\"") > 0)
             {
-                PlayerTransferParam ptParam = param.CopyBaseParam<PlayerTransferParam>();
+                PlayerTransferParam ptParam = param.CopyCreateParam<PlayerTransferParam>();
                 PlayerManager.AddOrUpdateParam(ptParam);
             }
         }

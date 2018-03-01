@@ -22,6 +22,12 @@ namespace QIC.Sport.Stats.Collector.BetRadar
                 case RBHandleType.Season:
                     handle = IocUnity.GetService<IHandle>(typeof(SeasonHandle).Name);
                     break;
+                case RBHandleType.SeasonType:
+                    handle = IocUnity.GetService<IHandle>(typeof(SeasonTypeHandle).Name);
+                    break;
+                case RBHandleType.SeasonTable:
+                    handle = IocUnity.GetService<IHandle>(typeof(SeasonTableHandle).Name);
+                    break;
                 case RBHandleType.Team:
                     handle = IocUnity.GetService<IHandle>(typeof(TeamHandle).Name);
                     break;

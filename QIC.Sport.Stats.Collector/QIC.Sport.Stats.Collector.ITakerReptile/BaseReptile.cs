@@ -14,7 +14,6 @@ namespace QIC.Sport.Stats.Collector.ITakerReptile
 
         public void Start()
         {
-            // todo 循环Start各个BaseWorkManager
             foreach (var manager in DicWorkManagers.Values)
             {
                 manager.Start();

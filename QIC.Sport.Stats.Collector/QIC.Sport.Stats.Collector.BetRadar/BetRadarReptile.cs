@@ -27,8 +27,6 @@ namespace QIC.Sport.Stats.Collector.BetRadar
         }
         public override void InitWorkManager()
         {
-            // todo IOC生成所有Manager并加入到管理集合中
-
             var organizerManager = new OrganizerManager();
             IocUnity.RegisterInstance<IWorkManager>(typeof(OrganizerManager).Name, organizerManager);
             DicWorkManagers.Add(typeof(OrganizerManager).Name, (IWorkManager)organizerManager);
@@ -85,6 +83,14 @@ namespace QIC.Sport.Stats.Collector.BetRadar
             IocUnity.RegisterInstance<ICacheManager>(typeof(SeasonEntityManager).Name, seasonEntityManager);
             DicCacheManagers.Add(typeof(SeasonEntityManager).Name, (ICacheManager)seasonEntityManager);
 
+            var seasonTypeInfoManager = new SeasonTypeInfoManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(SeasonTypeInfoManager).Name, seasonTypeInfoManager);
+            DicCacheManagers.Add(typeof(SeasonTypeInfoManager).Name, (ICacheManager)seasonEntityManager);
+
+            var seasonTableInfoManager = new SeasonTableInfoManager();
+            IocUnity.RegisterInstance<ICacheManager>(typeof(SeasonTableInfoManager).Name, seasonTableInfoManager);
+            DicCacheManagers.Add(typeof(SeasonTableInfoManager).Name, (ICacheManager)seasonEntityManager);
+
             var seasonTeamsManager = new SeasonTeamsManager();
             IocUnity.RegisterInstance<ICacheManager>(typeof(SeasonTeamsManager).Name, seasonTeamsManager);
             DicCacheManagers.Add(typeof(SeasonTeamsManager).Name, (ICacheManager)seasonTeamsManager);
@@ -101,6 +107,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar
         {
             IocUnity.RegisterType<IHandle, OrganizerHandle>(typeof(OrganizerHandle).Name);
             IocUnity.RegisterType<IHandle, SeasonHandle>(typeof(SeasonHandle).Name);
+            IocUnity.RegisterType<IHandle, SeasonTypeHandle>(typeof(SeasonTypeHandle).Name);
+            IocUnity.RegisterType<IHandle, SeasonTableHandle>(typeof(SeasonTableHandle).Name);
             IocUnity.RegisterType<IHandle, TeamHandle>(typeof(TeamHandle).Name);
             IocUnity.RegisterType<IHandle, PlayerHandle>(typeof(PlayerHandle).Name);
             IocUnity.RegisterType<IHandle, MatchHandle>(typeof(MatchHandle).Name);

@@ -44,20 +44,32 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             te.TeamName = teamName;
 
             var trsTeam = root.SelectNodes("//tbody/tr");
-            if (trsTeam.Count > 2)
+            if (trsTeam.Count == 2)
+            {
+                te.Manager = trsTeam[1].LastChild.InnerText;
+            }else if (trsTeam.Count > 2)
             {
                 te.Manager = trsTeam[1].LastChild.InnerText;
                 te.Venue = trsTeam[2].LastChild.InnerText;
-                var teamEntity = TeamEntityManager.AddOrGetCacheEntity<TeamEntity>(te.TeamId);
-                teamEntity.CompareSetTeamEntity(te);
             }
+            var teamEntity = TeamEntityManager.AddOrGetCacheEntity<TeamEntity>(te.TeamId);
+            teamEntity.CompareSetTeamEntity(te);
 
             #region  队伍球员相关信息
 
             //  解析进球数获得队员的点球个数，更新到队员点球信息缓存中
             if (cdata.Count < 16) return;// 此队伍无队员信息，克罗地亚乙级联赛->卢科
 
-            var penGoals = cdata[14];
+            var penGoals = "";
+            foreach (var d in cdata)
+            {
+                if (d.IndexOf("normaltable toplist") > 0)
+                {
+                    penGoals = d;
+                    break;
+                }
+            }
+
             root = GetHtmlRoot(penGoals);
             var trsPenGoals = root.SelectNodes("//tbody/tr");
             if (trsPenGoals != null)
@@ -103,7 +115,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
             //  如果有添加获取伤停的任务
             if (txt.IndexOf("o=\"1003\"") > 0)
             {
-                InjuryParam ip = param.CopyBaseParam<InjuryParam>();
+                InjuryParam ip = param.CopyCreateParam<InjuryParam>();
                 LeagueManager.AddOrUpdateParam(ip);
             }
         }
@@ -117,7 +129,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 {
                     kv.Value.ForEach(o =>
                     {
-                        PlayerParam pp = param.CopyBaseParam<PlayerParam>();
+                        PlayerParam pp = param.CopyCreateParam<PlayerParam>();
                         pp.PlayerId = o;
                         PlayerManager.AddOrUpdateParam(pp);
                     });
@@ -126,7 +138,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 {
                     kv.Value.ForEach(o =>
                     {
-                        PlayerParam pp = param.CopyBaseParam<PlayerParam>();
+                        PlayerParam pp = param.CopyCreateParam<PlayerParam>();
                         pp.PlayerId = o;
                         PlayerManager.RemoveParam(pp);
                     });

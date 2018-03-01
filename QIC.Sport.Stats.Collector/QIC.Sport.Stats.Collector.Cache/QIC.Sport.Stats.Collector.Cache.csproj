@@ -48,7 +48,9 @@
     <Compile Include="CacheDataManager\PlayerTimeRecordManager.cs" />
     <Compile Include="CacheDataManager\PlayerPenaltiesManager.cs" />
     <Compile Include="CacheDataManager\SeasonEntityManager.cs" />
+    <Compile Include="CacheDataManager\SeasonTableInfoManager.cs" />
     <Compile Include="CacheDataManager\SeasonTeamsManager.cs" />
+    <Compile Include="CacheDataManager\SeasonTypeInfoManager.cs" />
     <Compile Include="CacheDataManager\TeamEntityManager.cs" />
     <Compile Include="CacheDataManager\TeamPlayersManager.cs" />
     <Compile Include="CacheData\LeagueEntity.cs" />
@@ -61,10 +63,12 @@
     <Compile Include="CacheData\PlayerTimeRecord.cs" />
     <Compile Include="CacheData\SeasonEntity.cs" />
     <Compile Include="CacheData\SeasonPalyers.cs" />
+    <Compile Include="CacheData\SeasonTableInfo.cs" />
     <Compile Include="CacheData\SeasonTeams.cs" />
+    <Compile Include="CacheData\SeasonTypeInfo.cs" />
     <Compile Include="CacheData\TeamEntity.cs" />
     <Compile Include="CacheData\TeamPlayers.cs" />
-    <Compile Include="CombinedData\SeasonRank.cs" />
+    <Compile Include="CombinedData\Rank.cs" />
     <Compile Include="CombinedData\PlayerPenalties.cs" />
     <Compile Include="ICacheManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
