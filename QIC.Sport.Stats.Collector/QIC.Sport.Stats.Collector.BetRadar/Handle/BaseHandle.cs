@@ -32,6 +32,8 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         protected static readonly ICacheManager PlayerTimeRecordManager = IocUnity.GetService<ICacheManager>(typeof(PlayerTimeRecordManager).Name);
         protected static readonly ICacheManager SeasonEntityManager = IocUnity.GetService<ICacheManager>(typeof(SeasonEntityManager).Name);
         protected static readonly ICacheManager SeasonTeamsManager = IocUnity.GetService<ICacheManager>(typeof(SeasonTeamsManager).Name);
+        protected static readonly ICacheManager SeasonTypeInfoManager = IocUnity.GetService<ICacheManager>(typeof(SeasonTypeInfoManager).Name);
+        protected static readonly ICacheManager SeasonTableInfoManager = IocUnity.GetService<ICacheManager>(typeof(SeasonTableInfoManager).Name);
         protected static readonly ICacheManager TeamEntityManager = IocUnity.GetService<ICacheManager>(typeof(TeamEntityManager).Name);
         protected static readonly ICacheManager TeamPlayersManager = IocUnity.GetService<ICacheManager>(typeof(TeamPlayersManager).Name);
 

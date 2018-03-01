@@ -201,8 +201,20 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                             OrganizerId = entity.OrganizerId
                         };
 
-                        //  todo 测试只加入西班牙的联赛任务
+                        #region 测试只加入指定的联赛任务
+                        //一般联赛有积分的情况
                         //if (sid == "42556")
+
+                        //杯赛无积分的情况
+                        //if (sid == "42240")
+
+                        //世锦赛分组积分的情况
+                        //if (sid == "10876")
+
+                        //其他指定测试
+                        //if(sid=="44070")
+                        #endregion
+
                         LeagueManager.AddOrUpdateParam(sp);
                     }
                 }

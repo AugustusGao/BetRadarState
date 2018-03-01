@@ -39,7 +39,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Param
         }
         public virtual string GetUrl() { return null; }
 
-        public T CopyBaseParam<T>() where T : BRBaseParam, new()
+        public T CopyCreateParam<T>() where T : BRBaseParam, new()
         {
             var t = new T()
             {

@@ -83,6 +83,8 @@
     <Compile Include="Handle\PlayerTransferHandle.cs" />
     <Compile Include="Handle\SeasonHandle.cs" />
     <Compile Include="Handle\PlayerHandle.cs" />
+    <Compile Include="Handle\SeasonTableHandle.cs" />
+    <Compile Include="Handle\SeasonTypeHandle.cs" />
     <Compile Include="Handle\TeamHandle.cs" />
     <Compile Include="Param\BRBaseParam.cs" />
     <Compile Include="BetRadarReptile.cs" />
@@ -99,6 +101,8 @@
     <Compile Include="Param\OrganizerParam.cs" />
     <Compile Include="Manager\PlayerManager.cs" />
     <Compile Include="Param\PlayerParam.cs" />
+    <Compile Include="Param\SeasonTableParam.cs" />
+    <Compile Include="Param\SeasonTypeParam.cs" />
     <Compile Include="Param\TeamParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Manager\TeamManager.cs" />

@@ -15,5 +15,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar
         Player,
         Injury,
         PlayerTransfer,
+        SeasonType,             //  赛季子类
+        SeasonTable,            //  赛季组别
     }
 }
