@@ -40,7 +40,6 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                 var cc = cs.Attributes["href"];
                 if (cc == null)
                 {
-                    // 世界
                     continue;
                 }
                 //  大洲的信息
@@ -145,40 +144,44 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                     }
                 }
                 // 需要进一步处理的Organizers数据
-                foreach (var node in needNodes)
+                for (int i = 0; i < needNodes.Count; i++)
                 {
-                    if (node.ChildNodes.Count < 3)
-                    {
-                        //  世界
-                        continue;
-                    }
+                    var node = needNodes[i];
                     var a = node.ChildNodes[0];
                     var organizerId = RegexGetStr(a.Attributes["href"].Value, "3_", ",");
                     var organizerName = a.InnerText;
                     OrganizerEntity ent = OrganizerEntityManager.AddOrGetCacheEntity<OrganizerEntity>(organizerId);
                     ent.ContinentId = continentId;
                     ent.ContinentName = continentName;
+                    
+                    if (node.ChildNodes.Count < 3)
+                    {
+                        //  青年
+                        continue;
+                    }
+                    
                     ent.OrganizerId = organizerId;
                     ent.OrganizerName = organizerName;
 
-                    var uls = node.ChildNodes[2].ChildNodes;
-
-                    var list = new List<string>();
-                    foreach (var ul in uls)
+                    var lis = node.ChildNodes[2].ChildNodes;
+                    var seasonIdlist = new List<string>();
+                    var moreLis = new List<HtmlNode>();     //  更多业余的联赛
+                    foreach (var li in lis)
                     {
-                        var s = ul.ChildNodes[0].Attributes["href"].Value;
+                        var s = li.ChildNodes[0].Attributes["href"].Value;
                         var seasonId = RegexGetStr(s, "seasonid','", "',");
                         if (string.IsNullOrEmpty(seasonId))
                         {
-                            // 业余联赛
+                            moreLis.Add(li);
+                            needNodes.AddRange(moreLis);
                             continue;
                         }
                         LeagueEntity le = LeagueEntityManager.AddOrGetCacheEntity<LeagueEntity>(seasonId);
-                        le.LeagueName = ul.InnerText;
+                        le.LeagueName = li.InnerText;
                         le.AddSeasonId(seasonId, true);
-                        list.Add(seasonId);
+                        seasonIdlist.Add(seasonId);
                     }
-                    var cpDic = ent.CompareSetSeasonIds(list);
+                    var cpDic = ent.CompareSetSeasonIds(seasonIdlist);
                     NextAssignTask(ent, cpDic);
                 }
                 #endregion
