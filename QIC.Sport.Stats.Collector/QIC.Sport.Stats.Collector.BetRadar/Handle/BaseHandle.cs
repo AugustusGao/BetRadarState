@@ -42,8 +42,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
         {
             txt = "";
             if (string.IsNullOrEmpty(html)) return false;
-            if (html.Contains("error"))
-                throw new Exception("Cannot parse error page.");
+            if (html.Contains("error")) return false;
             txt = HttpUtility.HtmlDecode(html);
             return true;
         }
@@ -58,7 +57,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
 
         public void CheckSetHistoryParam(BRBaseParam param)
         {
-            if (param.IsHistoryParam) 
+            if (param.IsHistoryParam)
                 param.IsHistoryComplete = true;
         }
         public static string GetDataLikeKey(List<string> cdata, string likeKey, string notLikeKey = null)

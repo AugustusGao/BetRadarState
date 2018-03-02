@@ -212,7 +212,7 @@ namespace QIC.Sport.Stats.Collector.BetRadar.Handle
                         //if (sid == "10876")
 
                         //其他指定测试
-                        //if(sid=="46176")
+                        //if (sid == "51035")
                         #endregion
 
                         LeagueManager.AddOrUpdateParam(sp);
